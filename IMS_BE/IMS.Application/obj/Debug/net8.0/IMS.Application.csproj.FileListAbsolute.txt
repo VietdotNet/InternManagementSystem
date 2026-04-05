@@ -1,0 +1,11 @@
+D:\DEHA\IMS\IMS_BE\IMS.Application\bin\Debug\net8.0\IMS.Application.deps.json
+D:\DEHA\IMS\IMS_BE\IMS.Application\bin\Debug\net8.0\IMS.Application.dll
+D:\DEHA\IMS\IMS_BE\IMS.Application\bin\Debug\net8.0\IMS.Application.pdb
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\IMS.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\IMS.Application.AssemblyInfoInputs.cache
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\IMS.Application.AssemblyInfo.cs
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\IMS.Application.csproj.CoreCompileInputs.cache
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\IMS.Application.dll
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\refint\IMS.Application.dll
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\IMS.Application.pdb
+D:\DEHA\IMS\IMS_BE\IMS.Application\obj\Debug\net8.0\ref\IMS.Application.dll

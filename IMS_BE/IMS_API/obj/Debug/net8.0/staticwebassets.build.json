@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "4wmD1acSr+UUPX0iE8L2ZN5oJ0QJNqCAXpUZ5vjOAXk=",
+  "Source": "IMS.Api",
+  "BasePath": "_content/IMS.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
