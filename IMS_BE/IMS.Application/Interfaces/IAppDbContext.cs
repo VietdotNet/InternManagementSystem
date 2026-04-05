@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IMS.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +10,15 @@ namespace IMS.Application.Interfaces
 {
     public interface IAppDbContext
     {
+        DbSet<Intern> Interns { get; set; }
+        DbSet<ProgramTraining> ProgramTrainings { get; set; }
+        DbSet<ProgramTrack> ProgramTracks { get; set; }
+        DbSet<ProgramMentor> ProgramMentors { get; set; }
+        DbSet<Lesson> Lessons { get; set; }
+        DbSet<ReviewMessage> ReviewMessages { get; set; }
+        DbSet<ReviewRequest> ReviewRequests { get; set; }
+        DbSet<Notification> Notifications { get; set; }
 
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

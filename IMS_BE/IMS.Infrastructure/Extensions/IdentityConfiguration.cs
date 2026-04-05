@@ -1,4 +1,5 @@
-﻿using IMS.Infrastructure.Persistence;
+﻿using IMS.Application.Interfaces;
+using IMS.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,8 @@ namespace IMS.Infrastructure.DependencyInjection
 
             services.AddDbContext<AppDbContext>(options =>
                options.UseSqlServer(connectionString));
+
+            services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

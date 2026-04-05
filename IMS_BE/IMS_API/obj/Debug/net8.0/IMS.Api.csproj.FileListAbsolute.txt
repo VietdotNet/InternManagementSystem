@@ -141,6 +141,7 @@ D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\IMS.Api.AssemblyInfo.cs
 D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\IMS.Api.csproj.CoreCompileInputs.cache
 D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\IMS.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\IMS.Api.MvcApplicationPartsAssemblyInfo.cache
+D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\IMS.Api.sourcelink.json
 D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\staticwebassets.build.json
 D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\staticwebassets.development.json
 D:\DEHA\IMS\IMS_BE\IMS_API\obj\Debug\net8.0\staticwebassets\msbuild.IMS.Api.Microsoft.AspNetCore.StaticWebAssets.props

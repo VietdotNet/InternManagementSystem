@@ -1577,6 +1577,10 @@
       "IMS.Application/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "IMS.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.25"
+        },
         "compile": {
           "bin/placeholder/IMS.Application.dll": {}
         },

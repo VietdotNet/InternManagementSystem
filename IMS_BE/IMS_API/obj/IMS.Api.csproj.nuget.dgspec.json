@@ -27,7 +27,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\DEHA\\IMS\\IMS_BE\\IMS.Domain\\IMS.Domain.csproj": {
+                "projectPath": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Domain\\IMS.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -44,6 +48,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.25, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

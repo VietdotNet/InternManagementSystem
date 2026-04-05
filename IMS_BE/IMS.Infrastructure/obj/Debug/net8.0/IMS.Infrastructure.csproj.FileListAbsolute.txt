@@ -11,6 +11,7 @@ D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\IMS.Infrastructure.Genera
 D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\IMS.Infrastructure.AssemblyInfoInputs.cache
 D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\IMS.Infrastructure.AssemblyInfo.cs
 D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\IMS.Infrastructure.csproj.CoreCompileInputs.cache
+D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\IMS.Infrastructure.sourcelink.json
 D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\IMS.Infr.A6A27735.Up2Date
 D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\IMS.Infrastructure.dll
 D:\DEHA\IMS\IMS_BE\IMS.Infrastructure\obj\Debug\net8.0\refint\IMS.Infrastructure.dll

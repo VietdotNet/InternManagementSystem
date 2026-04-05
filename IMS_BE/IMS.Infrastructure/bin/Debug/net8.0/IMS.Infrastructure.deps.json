@@ -962,6 +962,10 @@
         }
       },
       "IMS.Application/1.0.0": {
+        "dependencies": {
+          "IMS.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.25"
+        },
         "runtime": {
           "IMS.Application.dll": {}
         }

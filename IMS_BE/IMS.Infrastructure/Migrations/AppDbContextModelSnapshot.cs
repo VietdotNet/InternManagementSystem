@@ -22,6 +22,268 @@ namespace IMS.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("IMS.Domain.Entities.Intern", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("JoinDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProgramTrackId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramTrackId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Interns");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.Lesson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("LessonName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderIndex")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgramTrackId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("rowversion");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramTrackId");
+
+                    b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ReviewRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReviewRequestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ProgramMentor", b =>
+                {
+                    b.Property<int>("ProgramTrainingId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("AssignedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ProgramTrainingId", "UserId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProgramMentors");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ProgramTrack", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.ToTable("ProgramTracks");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ProgramTraining", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("date");
+
+                    b.Property<bool>("IsClosed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProgramTrainings");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ReviewMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReviewRequestId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReviewRequestId");
+
+                    b.ToTable("ReviewMessages");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ReviewRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Attempt")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("InternId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LessonId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MentorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoteByMentor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProgramTrackId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProgramTrackId1")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Score")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InternId");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("LessonId1");
+
+                    b.HasIndex("MentorId");
+
+                    b.HasIndex("ProgramTrackId");
+
+                    b.HasIndex("ProgramTrackId1");
+
+                    b.ToTable("ReviewRequests");
+                });
+
             modelBuilder.Entity("IMS.Infrastructure.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -224,6 +486,128 @@ namespace IMS.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("IMS.Domain.Entities.Intern", b =>
+                {
+                    b.HasOne("IMS.Domain.Entities.ProgramTrack", "ProgramTrack")
+                        .WithMany("Interns")
+                        .HasForeignKey("ProgramTrackId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMS.Infrastructure.AppUser", null)
+                        .WithOne("Intern")
+                        .HasForeignKey("IMS.Domain.Entities.Intern", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ProgramTrack");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.Lesson", b =>
+                {
+                    b.HasOne("IMS.Domain.Entities.ProgramTrack", "ProgramTrack")
+                        .WithMany("Lessons")
+                        .HasForeignKey("ProgramTrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProgramTrack");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.Notification", b =>
+                {
+                    b.HasOne("IMS.Domain.Entities.ReviewRequest", "ReviewRequest")
+                        .WithMany()
+                        .HasForeignKey("ReviewRequestId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("IMS.Infrastructure.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ReviewRequest");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ProgramMentor", b =>
+                {
+                    b.HasOne("IMS.Domain.Entities.ProgramTraining", "ProgramTraining")
+                        .WithMany("ProgramMentors")
+                        .HasForeignKey("ProgramTrainingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IMS.Infrastructure.AppUser", null)
+                        .WithMany("ProgramMentors")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("ProgramTraining");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ProgramTrack", b =>
+                {
+                    b.HasOne("IMS.Domain.Entities.ProgramTraining", "ProgramTraining")
+                        .WithMany("ProgramTracks")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProgramTraining");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ReviewMessage", b =>
+                {
+                    b.HasOne("IMS.Domain.Entities.ReviewRequest", "ReviewRequest")
+                        .WithMany("Messages")
+                        .HasForeignKey("ReviewRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ReviewRequest");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ReviewRequest", b =>
+                {
+                    b.HasOne("IMS.Infrastructure.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("InternId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMS.Domain.Entities.Lesson", "Lesson")
+                        .WithMany()
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("IMS.Domain.Entities.Lesson", null)
+                        .WithMany("ReviewRequests")
+                        .HasForeignKey("LessonId1");
+
+                    b.HasOne("IMS.Infrastructure.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("MentorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMS.Domain.Entities.ProgramTrack", "ProgramTrack")
+                        .WithMany()
+                        .HasForeignKey("ProgramTrackId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("IMS.Domain.Entities.ProgramTrack", null)
+                        .WithMany("ReviewRequests")
+                        .HasForeignKey("ProgramTrackId1");
+
+                    b.Navigation("Lesson");
+
+                    b.Navigation("ProgramTrack");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -273,6 +657,40 @@ namespace IMS.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.Lesson", b =>
+                {
+                    b.Navigation("ReviewRequests");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ProgramTrack", b =>
+                {
+                    b.Navigation("Interns");
+
+                    b.Navigation("Lessons");
+
+                    b.Navigation("ReviewRequests");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ProgramTraining", b =>
+                {
+                    b.Navigation("ProgramMentors");
+
+                    b.Navigation("ProgramTracks");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.ReviewRequest", b =>
+                {
+                    b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("IMS.Infrastructure.AppUser", b =>
+                {
+                    b.Navigation("Intern")
+                        .IsRequired();
+
+                    b.Navigation("ProgramMentors");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,6 +5,7 @@ D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\IMS.Domain.GeneratedMSBuildEditor
 D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\IMS.Domain.AssemblyInfoInputs.cache
 D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\IMS.Domain.AssemblyInfo.cs
 D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\IMS.Domain.csproj.CoreCompileInputs.cache
+D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\IMS.Domain.sourcelink.json
 D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\IMS.Domain.dll
 D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\refint\IMS.Domain.dll
 D:\DEHA\IMS\IMS_BE\IMS.Domain\obj\Debug\net8.0\IMS.Domain.pdb
