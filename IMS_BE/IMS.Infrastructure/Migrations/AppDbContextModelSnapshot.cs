@@ -188,6 +188,44 @@ namespace IMS.Infrastructure.Migrations
                     b.ToTable("ProgramTrainings");
                 });
 
+            modelBuilder.Entity("IMS.Domain.Entities.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReplacedByToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RevokedReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TokenHash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
+                });
+
             modelBuilder.Entity("IMS.Domain.Entities.ReviewMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -556,6 +594,15 @@ namespace IMS.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("ProgramTraining");
+                });
+
+            modelBuilder.Entity("IMS.Domain.Entities.RefreshToken", b =>
+                {
+                    b.HasOne("IMS.Infrastructure.AppUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("IMS.Domain.Entities.ReviewMessage", b =>

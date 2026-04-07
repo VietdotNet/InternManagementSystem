@@ -18,6 +18,7 @@ namespace IMS.Application.Interfaces
         DbSet<ReviewMessage> ReviewMessages { get; set; }
         DbSet<ReviewRequest> ReviewRequests { get; set; }
         DbSet<Notification> Notifications { get; set; }
+        DbSet<RefreshToken> RefreshTokens { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

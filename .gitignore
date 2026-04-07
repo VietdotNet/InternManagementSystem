@@ -1,16 +1,17 @@
 # =====================
 # BACKEND (.NET)
 # =====================
-be/**/bin/
-be/**/obj/
-be/.vs/
+IMS_BE/**/bin/
+IMS_BE/**/obj/
+IMS_BE/.vs/
+IMS_BE/IMS.Infrastructure/Persistence/SeedData.cs
 
 # =====================
 # FRONTEND (React)
 # =====================
-fe/node_modules/
-fe/dist/
-fe/build/
+ims-fe/node_modules/
+ims-fe/dist/
+ims-fe/build/
 
 # =====================
 # ENV
