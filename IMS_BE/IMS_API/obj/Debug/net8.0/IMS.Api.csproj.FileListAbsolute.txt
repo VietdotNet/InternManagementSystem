@@ -9,6 +9,7 @@ D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Azure.Core.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Azure.Identity.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\DotNetEnv.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Humanizer.dll
+D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

@@ -1,12 +1,15 @@
 
 using DotNetEnv;
+using IMS.Infrastructure;
 using IMS.Infrastructure.DependencyInjection;
+using IMS.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
 
 namespace IMS_API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Env.Load();
 
@@ -32,8 +35,20 @@ namespace IMS_API
                 app.UseSwaggerUI();
             }
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                await SeedData.SeedRoles(
+                    services.GetRequiredService<RoleManager<IdentityRole>>());
+
+                await SeedData.SeedAdmin(
+                    services.GetRequiredService<UserManager<AppUser>>());
+            }
+
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

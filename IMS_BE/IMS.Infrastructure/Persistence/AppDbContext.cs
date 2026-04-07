@@ -27,6 +27,7 @@ namespace IMS.Infrastructure.Persistence
         public DbSet<ReviewMessage> ReviewMessages { get; set; }
         public DbSet<ReviewRequest> ReviewRequests { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -124,6 +125,12 @@ namespace IMS.Infrastructure.Persistence
                     .HasMaxLength(500)
                     .IsRequired();
             });
+
+            builder.Entity<RefreshToken>()
+                .HasOne<AppUser>()
+                .WithMany()
+                .HasForeignKey(rt => rt.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }
