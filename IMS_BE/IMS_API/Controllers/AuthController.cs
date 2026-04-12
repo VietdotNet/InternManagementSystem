@@ -34,6 +34,7 @@ namespace IMS.Api.Controllers
 
                 var auth = await _authService.LoginAsync(req, cancellationToken);
 
+                SetAccessTokenCookie(auth.AccessToken);
                 SetRefreshTokenCookie(auth.RefreshToken);
 
                 return Ok(new
@@ -58,7 +59,6 @@ namespace IMS.Api.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> LogoutAsync(CancellationToken cancellationToken)
         {
-            // Lấy refresh token từ cookie
             var refreshToken = Request.Cookies["refresh_token"];
 
             if (string.IsNullOrEmpty(refreshToken))
@@ -69,7 +69,13 @@ namespace IMS.Api.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            // Xóa cookie
+            Response.Cookies.Delete("access_token", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None
+            });
+
             Response.Cookies.Delete("refresh_token", new CookieOptions
             {
                 HttpOnly = true,
@@ -91,6 +97,7 @@ namespace IMS.Api.Controllers
             {
                 var result = await _authService.RefreshTokenAsync(refreshToken, cancellationToken);
 
+                SetAccessTokenCookie(result.AccessToken);
                 SetRefreshTokenCookie(result.RefreshToken);
 
                 return Ok(new
@@ -110,6 +117,29 @@ namespace IMS.Api.Controllers
 
         }
 
+        [HttpPost("set-password")]
+        public async Task<IActionResult> SetPasswordAsync(SetPasswordRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _authService.SetPasswordAsync(request, cancellationToken);
+
+            if (!result.Success)
+                return BadRequest(result);
+                
+            return Ok(result);
+        }
+
+        private void SetAccessTokenCookie(string accessToken)
+        {
+            Response.Cookies.Append("access_token", accessToken, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Path = "/",
+                Expires = DateTime.UtcNow.AddMinutes(_jwt.AccessTokenMinutes)
+            });
+        }
+
         private void SetRefreshTokenCookie(string refreshToken)
         {
             Response.Cookies.Append("refresh_token", refreshToken, new CookieOptions
@@ -117,6 +147,7 @@ namespace IMS.Api.Controllers
                 HttpOnly = true,
                 Secure = true,
                 SameSite = SameSiteMode.None,
+                Path = "/",
                 Expires = DateTime.UtcNow.AddDays(_jwt.RefreshTokenDays)
             });
         }

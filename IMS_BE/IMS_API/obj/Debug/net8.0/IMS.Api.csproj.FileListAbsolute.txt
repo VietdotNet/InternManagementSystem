@@ -7,8 +7,10 @@ D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\IMS.Api.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\IMS.Api.pdb
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Azure.Core.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Azure.Identity.dll
+D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\DotNetEnv.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Humanizer.dll
+D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\MailKit.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -44,6 +46,7 @@ D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.OpenApi.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\MimeKit.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Mono.TextTemplating.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Sprache.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
@@ -62,6 +65,7 @@ D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.Formats.Asn1.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.Memory.Data.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.Runtime.Caching.dll
+D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.Security.Permissions.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\System.Windows.Extensions.dll
@@ -127,6 +131,7 @@ D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\Microsoft.Wi
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\DEHA\IMS\IMS_BE\IMS_API\bin\Debug\net8.0\IMS.Application.dll

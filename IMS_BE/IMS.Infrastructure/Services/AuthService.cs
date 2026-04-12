@@ -1,11 +1,13 @@
 ﻿using IMS.Application.DTOs.Auth;
 using IMS.Application.Interfaces.Persistence;
+using IMS.Application.Interfaces.Repositories;
 using IMS.Application.Interfaces.Services;
 using IMS.Domain.Common;
 using IMS.Domain.Entities;
 using IMS.Domain.Enums;
 using IMS.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -25,17 +27,20 @@ namespace IMS.Infrastructure.Services
         private readonly JwtSetting _jwt;
         private readonly UserManager<AppUser> _userManager;
         private readonly IRefreshTokenRepository _refreshRepo;
+        private readonly IUserRepository _userRepo;
 
         public AuthService
         (
             IOptions<JwtSetting> options,
             UserManager<AppUser> userManager,
-            IRefreshTokenRepository refreshRepo
+            IRefreshTokenRepository refreshRepo,
+            IUserRepository userRepo
         )
         {
             _jwt = options.Value;
             _userManager = userManager;
             _refreshRepo = refreshRepo;
+            _userRepo = userRepo;
         }
 
         public async Task<LoginResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken)
@@ -60,7 +65,7 @@ namespace IMS.Infrastructure.Services
                 existingRefreshToken.RevokedReason = RevokedReasons.Replaced;
                 existingRefreshToken.ReplacedByToken = refreshTokenHash;
 
-                 _refreshRepo.Update(existingRefreshToken);
+                _refreshRepo.Update(existingRefreshToken);
             }
 
              var newToken = new RefreshToken
@@ -128,7 +133,7 @@ namespace IMS.Infrastructure.Services
             existing.RevokedReason = RevokedReasons.Replaced;
             existing.ReplacedByToken = newHash;
 
-            _refreshRepo.Update(existing);
+            
 
             var newToken = new RefreshToken
             {
@@ -138,6 +143,8 @@ namespace IMS.Infrastructure.Services
                 CreatedAt = DateTime.Now,
                 IsRevoked = false
             };
+
+            _refreshRepo.Update(existing);
 
             await _refreshRepo.CreateAsync(newToken);
             await _refreshRepo.SaveChangesAsync(cancellationToken);
@@ -150,6 +157,52 @@ namespace IMS.Infrastructure.Services
                 AccessTokenExpiryDate = accessToken.ExpiryDate,
                 RefreshToken = newRefreshToken
             };
+        }
+
+        public async Task<ServiceResult> SetPasswordAsync(SetPasswordRequest request, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(request.UserId) || string.IsNullOrEmpty(request.Token))
+                return ServiceResult.Fail("Link không hợp lệ");
+
+            var user = await _userManager.FindByIdAsync(request.UserId);
+
+            if (user == null)
+                return ServiceResult.Fail("Invalid user");
+
+            if (user.PasswordHash != null)
+                return ServiceResult.Fail("Tài khoản đã được kích hoạt");
+
+            string decodedToken;
+            try
+            {
+                decodedToken = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.Token));
+            }
+            catch
+            {
+                return ServiceResult.Fail("Invalid Token");
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, decodedToken, request.Password);
+
+            if (!result.Succeeded)
+                return ServiceResult.Fail(string.Join(", ", result.Errors.Select(e => e.Description)));
+
+            user.EmailConfirmed = true;
+            await _userManager.UpdateAsync(user);
+
+            if (await _userManager.IsInRoleAsync(user, "Intern"))
+            {
+                var intern = await _userRepo.GetInternByIdAsync(user.Id);
+                if (intern != null)
+                {
+                    intern.JoinDate = DateTime.Now;
+                    intern.Status = InternStatus.Active;
+
+                    await _userRepo.SaveChangesAsync(cancellationToken);
+                }
+            }
+
+            return ServiceResult.Ok("Thiết lập mật khẩu thành công");
         }
 
         private async Task<(string Token, DateTime ExpiryDate)> GenerateJwtTokenAsync(AppUser user)
@@ -180,6 +233,7 @@ namespace IMS.Infrastructure.Services
                 Subject = new ClaimsIdentity(claims),
                 Expires = expires,
                 Issuer = _jwt.Issuer,
+                Audience = _jwt.Audience,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
             };
 
