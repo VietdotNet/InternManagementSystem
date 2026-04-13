@@ -4,9 +4,13 @@ import LoginHeader from "../components/LoginHeader";
 import LoginForm from "../components/LoginForm";
 import LoginHints from "../components/LoginHints";
 import LoginSidebar from "../components/LoginSidebar";
+import { useEffect } from "react";
+
+import { useAuth } from "@/shared/context/AuthContext";
 
 function LoginPage() {
   const [, navigate] = useLocation();
+  const { user, setUser } = useAuth();
 
   const {
     formData,
@@ -23,10 +27,21 @@ function LoginPage() {
 
   async function onSubmit(e) {
     const result = await handleSubmit(e);
-    if (result?.success) {
-      navigate("/dashboard");
+    if (result?.success && result.user) {
+      setUser(result.user); // Lưu user vào context
     }
+
+  };
+
+  useEffect(() => {
+  if (!user) return;
+
+  if (user.role === "Admin") {
+    navigate("/dashboard");
+  } else if (user.role === "Intern") {
+    navigate("/intern");
   }
+}, [user]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">

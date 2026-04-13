@@ -117,29 +117,214 @@ export const store = {
 
 export const mockProgram = {
   id: 1,
-  code: "202603",
-  name: "Intern Java - dotNET",
-  startDate: "3/9/2026",
-  endDate: "5/6/2026",
-  status: "Ongoing",
+  code: '202603',
+  title: 'Intern Java - dotNET',
+  status: 'Ongoing',
+  startDate: '3/9/2026',
+  endDate: '5/6/2026',
+  tracks: [
+    {
+      id: 1,
+      name: 'Intern .NET',
+      icon: '🪟',
+      lessons: [
+        {
+          id: 1,
+          name: 'Linux',
+          status: 'Passed',
+          maxAttempts: 3,
+          attempts: 2,
+          prerequisiteId: null,
+        },
+        {
+          id: 2,
+          name: 'Git cơ bản',
+          status: 'NotStarted',
+          maxAttempts: 3,
+          attempts: 0,
+          prerequisiteId: null,
+        },
+        {
+          id: 3,
+          name: 'ASP.NET core MVC',
+          status: 'NotStarted',
+          maxAttempts: 3,
+          attempts: 0,
+          prerequisiteId: 2,
+        },
+        {
+          id: 4,
+          name: 'EF core',
+          status: 'NotStarted',
+          maxAttempts: 3,
+          attempts: 0,
+          prerequisiteId: 3,
+        },
+        {
+          id: 5,
+          name: 'Dependency Injection',
+          status: 'NotStarted',
+          maxAttempts: 3,
+          attempts: 0,
+          prerequisiteId: 4,
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Intern Java',
+      icon: '☕',
+      lessons: [
+        {
+          id: 6,
+          name: 'Java Core',
+          status: 'NotStarted',
+          maxAttempts: 3,
+          attempts: 0,
+          prerequisiteId: null,
+        },
+        {
+          id: 7,
+          name: 'Spring Boot',
+          status: 'NotStarted',
+          maxAttempts: 3,
+          attempts: 0,
+          prerequisiteId: 6,
+        },
+        {
+          id: 8,
+          name: 'Spring Data JPA',
+          status: 'NotStarted',
+          maxAttempts: 3,
+          attempts: 0,
+          prerequisiteId: 7,
+        },
+      ],
+    },
+  ],
 };
 
-export const mockTrack = {
+export const mockUser = {
   id: 1,
-  name: "Intern .NET",
+  name: 'Nguyễn Quốc Việt',
+  email: 'viet.nq@intern.dev',
+  role: 'intern',
+  avatar: 'NV',
   programId: 1,
-  completionPercent: 25,
 };
 
-export const mockLessons = [
-  { id: 1, trackId: 1, title: "Linux", order: 1, status: "Passed", attempts: 2, maxAttempts: 3, requiresPrevious: false, canRequestReview: false },
-  { id: 2, trackId: 1, title: "Git cơ bản", order: 2, status: "NotStarted", attempts: 0, maxAttempts: 3, requiresPrevious: true, canRequestReview: true },
-  { id: 3, trackId: 1, title: "ASP.NET core MVC", order: 3, status: "NotStarted", attempts: 0, maxAttempts: 3, requiresPrevious: true, canRequestReview: false },
-  { id: 4, trackId: 1, title: "EF core", order: 4, status: "NotStarted", attempts: 0, maxAttempts: 3, requiresPrevious: true, canRequestReview: false },
+let reviewRequests = [
+  {
+    id: 1,
+    lessonId: 1,
+    lessonName: 'Linux',
+    trackName: 'Intern .NET',
+    attempt: 2,
+    attemptLabel: 'Kiểm tra lần 2',
+    createdAt: '03/04/2026 10:59',
+    status: 'Passed',
+    score: 8,
+    note: 'abc',
+    messages: [
+      {
+        id: 1,
+        senderId: 2,
+        senderName: 'Trần Văn Mentor',
+        senderRole: 'mentor',
+        text: 'Bạn đã hoàn thành tốt bài Linux. Chúc mừng!',
+        time: '03/04/2026 11:05',
+      },
+      {
+        id: 2,
+        senderId: 1,
+        senderName: 'Nguyễn Quốc Việt',
+        senderRole: 'intern',
+        text: 'Cảm ơn mentor!',
+        time: '03/04/2026 11:10',
+      },
+    ],
+  },
+  {
+    id: 2,
+    lessonId: 1,
+    lessonName: 'Linux',
+    trackName: 'Intern .NET',
+    attempt: 1,
+    attemptLabel: 'Kiểm tra lần 1',
+    createdAt: '03/04/2026 10:57',
+    status: 'NotPassed',
+    score: null,
+    note: 'Chưa nắm được lệnh cơ bản',
+    messages: [
+      {
+        id: 3,
+        senderId: 2,
+        senderName: 'Trần Văn Mentor',
+        senderRole: 'mentor',
+        text: 'Bạn cần ôn lại các lệnh Linux cơ bản như ls, cd, mkdir, rm, chmod...',
+        time: '03/04/2026 11:00',
+      },
+    ],
+  },
 ];
 
-export const mockReviews = [
-  { id: 1, lessonId: 1, lessonTitle: "Linux", trackName: "Intern .NET", attempt: 1, createdAt: "2026-03-04T10:57:00.000Z", status: "NotPassed", score: null, note: "Lần đầu thử" },
-  { id: 2, lessonId: 1, lessonTitle: "Linux", trackName: "Intern .NET", attempt: 2, createdAt: "2026-03-04T10:59:00.000Z", status: "Passed", score: 8, note: "abc" },
-];
+let nextReviewId = 3;
+
+export function getReviewRequests() {
+  return [...reviewRequests];
+}
+
+export function addReviewRequest(lessonId, lessonName, trackName, note) {
+  const existing = reviewRequests.filter((r) => r.lessonId === lessonId);
+  const attempt = existing.length + 1;
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const dateStr = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  const newReview = {
+    id: nextReviewId++,
+    lessonId,
+    lessonName,
+    trackName,
+    attempt,
+    attemptLabel: `Kiểm tra lần ${attempt}`,
+    createdAt: dateStr,
+    status: 'Pending',
+    score: null,
+    note,
+    messages: [],
+  };
+  reviewRequests = [newReview, ...reviewRequests];
+  return newReview;
+}
+
+export function addMessage(reviewId, text, userId) {
+  const review = reviewRequests.find((r) => r.id === reviewId);
+  if (!review) return null;
+  const now = new Date();
+  const pad = (n) => String(n).padStart(2, '0');
+  const dateStr = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()} ${pad(now.getHours())}:${pad(now.getMinutes())}`;
+  const msg = {
+    id: Date.now(),
+    senderId: mockUser.id,
+    senderName: mockUser.name,
+    senderRole: mockUser.role,
+    text,
+    time: dateStr,
+  };
+  review.messages = [...review.messages, msg];
+  return msg;
+}
+
+export function getLessonCanRequest(lessonId, tracks) {
+  for (const track of tracks) {
+    const lesson = track.lessons.find((l) => l.id === lessonId);
+    if (lesson) {
+      if (!lesson.prerequisiteId) return { canRequest: true };
+      const prereq = track.lessons.find((l) => l.id === lesson.prerequisiteId);
+      if (prereq && prereq.status === 'Passed') return { canRequest: true };
+      return { canRequest: false, reason: 'Cần phải pass bài học trước' };
+    }
+  }
+  return { canRequest: false, reason: 'Không tìm thấy bài học' };
+}
 

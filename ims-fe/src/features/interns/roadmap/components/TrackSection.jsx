@@ -1,75 +1,90 @@
-import { ChevronDown, ChevronRight, BookOpen } from "lucide-react";
-import { Progress } from "@/shared/components/ui/progress";
-import { LessonRow } from "./LessonRow";
-// import { useLessonsQuery } from "../services/roadmapService";
+import { useState } from 'react';
+import StatusBadge from '../../../../shared/components/StatusBadge.jsx';
+import { getLessonCanRequest } from '../../../../shared/store/mockData.js';
 
-export function TrackSection({ track, expanded, onToggle, onRequestReview }) {
-  const { data: lessons, isLoading } = useLessonsQuery(track.id);
-  const ChevronIcon = expanded ? ChevronDown : ChevronRight;
-  const completion = track.completionPercent ?? 0;
+function calcTrackCompletion(track) {
+  const total = track.lessons.length;
+  if (total === 0) return 0;
+  const passed = track.lessons.filter((l) => l.status === 'Passed').length;
+  return Math.round((passed / total) * 100);
+}
+
+export default function TrackSection({ track, allTracks, onRequestReview }) {
+  const [expanded, setExpanded] = useState(true);
+  const pct = calcTrackCompletion(track);
 
   return (
-    <div className="border rounded-lg overflow-hidden" data-testid={`track-${track.id}`}>
+    <div className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm">
+      {/* Track header */}
       <button
-        className="w-full flex items-center justify-between px-5 py-4 bg-white hover:bg-gray-50 transition-colors"
-        onClick={() => onToggle(track.id)}
-        data-testid={`button-toggle-track-${track.id}`}
+        className="w-full flex items-center justify-between px-5 py-4 bg-blue-50 hover:bg-blue-100 transition"
+        onClick={() => setExpanded((v) => !v)}
       >
-        <div className="flex items-center gap-3 min-w-0">
-          <BookOpen className="h-5 w-5 text-primary flex-shrink-0" />
-          <div className="text-left min-w-0">
-            <h3 className="font-semibold text-foreground truncate">{track.name}</h3>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              {lessons?.length ?? 0} lessons
-            </p>
-          </div>
+        <div className="flex items-center gap-2.5">
+          <span className="text-lg">{track.icon}</span>
+          <span className="font-semibold text-gray-800 text-sm">{track.name}</span>
         </div>
-        <div className="flex items-center gap-4 flex-shrink-0 ml-4">
-          <div className="hidden sm:flex items-center gap-3">
-            <Progress value={completion} className="w-28 h-2" />
-            <span className="text-sm font-medium w-10 text-right">{completion}%</span>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 min-w-[140px]">
+            <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-blue-500 rounded-full transition-all"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+            <span className="text-xs font-semibold text-blue-600 w-9 text-right">{pct}%</span>
           </div>
-          <ChevronIcon className="h-5 w-5 text-muted-foreground" />
+          <svg
+            className={`w-4 h-4 text-gray-500 transition-transform ${expanded ? '' : '-rotate-180'}`}
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+          </svg>
         </div>
       </button>
 
+      {/* Lessons */}
       {expanded && (
-        <div className="border-t">
-          {isLoading ? (
-            <div className="p-4 space-y-2">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-10 bg-gray-100 rounded animate-pulse" />
-              ))}
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b bg-gray-50">
-                    <th className="text-left px-4 py-2 font-semibold">Lesson</th>
-                    <th className="text-center px-4 py-2 font-semibold">Attempts</th>
-                    <th className="text-center px-4 py-2 font-semibold">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(!lessons || lessons.length === 0) && (
-                    <tr>
-                      <td colSpan={3} className="text-center py-6 text-muted-foreground text-sm">
-                        No lessons found.
-                      </td>
-                    </tr>
-                  )}
-                  {lessons?.map((lesson) => (
-                    <LessonRow
-                      key={lesson.id}
-                      lesson={lesson}
-                      onRequestReview={onRequestReview}
-                    />
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+        <div className="divide-y divide-gray-100">
+          {track.lessons.map((lesson) => {
+            const { canRequest, reason } = getLessonCanRequest(lesson.id, allTracks);
+            const isPassed = lesson.status === 'Passed';
+            const attemptsLeft = lesson.maxAttempts - lesson.attempts;
+
+            return (
+              <div key={lesson.id} className="px-5 py-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-gray-900 text-sm">{lesson.name}</p>
+                    <p className="text-xs text-gray-500 mt-0.5">
+                      Attempts: {lesson.attempts} / {lesson.maxAttempts}
+                    </p>
+                  </div>
+                  <StatusBadge status={lesson.status} />
+                </div>
+
+                {/* Action */}
+                {!isPassed && (
+                  <div className="mt-2.5 flex justify-end">
+                    {canRequest && attemptsLeft > 0 ? (
+                      <button
+                        onClick={() => onRequestReview(lesson, track.name)}
+                        className="px-3 py-1.5 text-xs font-medium border border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition"
+                      >
+                        Request Review
+                      </button>
+                    ) : (
+                      <p className="text-xs text-red-500 font-medium">
+                        {attemptsLeft === 0 ? 'Đã hết lượt kiểm tra' : reason}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

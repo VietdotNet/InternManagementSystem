@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Org.BouncyCastle.Ocsp;
+using System.Security.Claims;
 
 namespace IMS.Api.Controllers
 {
@@ -19,9 +20,9 @@ namespace IMS.Api.Controllers
             _userService = userService;
         }
 
-        [Authorize("Admin")]
+        [Authorize(Roles ="Admin")]
         [HttpPost("interns")]
-        public async Task<IActionResult> CreateInternAsync([FromBody]CreateInternRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateInternAsync([FromBody] CreateInternRequest request, CancellationToken cancellationToken)
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}";
             var result = await _userService.CreateInternAsync(request, baseUrl, cancellationToken);
@@ -33,7 +34,7 @@ namespace IMS.Api.Controllers
 
         }
 
-        [Authorize("Admin")]
+        [Authorize(Roles ="Admin")]
         [HttpPost("mentors")]
         public async Task<IActionResult> CreateMentorAsync([FromBody] CreateMentorRequest request)
         {

@@ -2,13 +2,11 @@ import { useLocation } from "wouter";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { logout } from "../../features/auth/services/authService";
+import { useAuth } from "@/shared/context/AuthContext";
 
 function AdminLayout({ children }) {
   const [location, navigate] = useLocation();
-
-//   function handleLogout() {
-//     navigate("/login");
-//   }
+  const { setUser } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -16,6 +14,7 @@ function AdminLayout({ children }) {
     } catch (err) {
       console.error("Logout error:", err);
     } finally {
+      setUser(null);
       navigate("/login");
     }
   };

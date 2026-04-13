@@ -12,11 +12,14 @@ import UsersPage from "@/features/users/pages/UsersPage";
 import CreateUserPage from "@/features/users/pages/CreateUserPage";
 import StatisticsPage from "@/features/statistics/pages/StatisticsPage";
 
-import { InternLayout } from "@/shared/components/InternLayout";
-import {InternDashboardPage} from "@/features/interns/dashboard/pages/InternDashboardPage";
-import { RoadmapPage } from "@/features/interns/roadmap/pages/RoadmapPage";
+import  InternLayout  from "@/shared/components/InternLayout";
+import InternDashboardPage from "@/features/interns/dashboard/pages/InternDashboardPage";
+import  RoadmapPage  from "@/features/interns/roadmap/pages/RoadmapPage";
 import { ReviewsPage } from "@/features/interns/reviews/pages/ReviewsPage";
-import { ReviewDetailPage } from "@/features/interns/review-detail/pages/ReviewDetailPage";
+import  ReviewDetailPage  from "@/features/interns/review-detail/pages/ReviewDetailPage";
+
+import { ProtectedRoute } from "@/shared/components/ProtectedRoute";
+import { AuthProvider } from "@/shared/context/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +42,7 @@ function InternRoutes() {
   return (
     <InternLayout>
       <Switch>
+        <Route path="/intern" component={InternDashboardPage} />
         <Route path="/roadmap" component={RoadmapPage} />
         <Route path="/reviews" component={ReviewsPage} />
         <Route path="/review/:id" component={ReviewDetailPage} />
@@ -54,20 +58,21 @@ function Router() {
      <Switch>
       <Route path="/login" component={LoginPage} />
 
-      <Route path="/dashboard" component={AdminRoutes} />
-      <Route path="/programs" component={AdminRoutes} />
-      <Route path="/programs/create" component={AdminRoutes} />
-      <Route path="/users" component={AdminRoutes} />
-      <Route path="/users/create" component={AdminRoutes} />
-      <Route path="/statistics" component={AdminRoutes} />
+       {/* Admin */}
+      <ProtectedRoute path="/dashboard" component={AdminRoutes} roles={["Admin"]} />
+      <ProtectedRoute path="/programs" component={AdminRoutes} roles={["Admin"]} />
+      <ProtectedRoute path="/programs/create" component={AdminRoutes} roles={["Admin"]} />
+      <ProtectedRoute path="/users" component={AdminRoutes} roles={["Admin"]} />
+      <ProtectedRoute path="/users/create" component={AdminRoutes} roles={["Admin"]} />
+      <ProtectedRoute path="/statistics" component={AdminRoutes} roles={["Admin"]}/>
 
-      {/* <Route path="/" component={InternRoutes} /> */}
-      <Route path="/roadmap" component={InternRoutes} />
-      <Route path="/reviews" component={InternRoutes} />
-      <Route path="/review/:id" component={InternRoutes} />
+      <ProtectedRoute path="/intern" component={InternRoutes} roles={["Intern"]} />
+      <ProtectedRoute path="/roadmap" component={InternRoutes} roles={["Intern"]} />
+      <ProtectedRoute path="/reviews" component={InternRoutes} roles={["Intern"]} />
+      <ProtectedRoute path="/review/:id" component={InternRoutes} roles={["Intern"]}/>
 
       {/* Default fallback */}
-      <Route component={LoginPage} />
+      <Route path="/" component={LoginPage} />
     </Switch>
   );
 }
@@ -76,9 +81,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <AuthProvider>
         <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
           <Router />
         </WouterRouter>
+        </AuthProvider>
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>

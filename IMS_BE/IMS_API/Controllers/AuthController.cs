@@ -1,9 +1,11 @@
 ﻿using IMS.Application.DTOs.Auth;
 using IMS.Application.Interfaces.Services;
 using IMS.Infrastructure.Settings;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Security.Claims;
 
 namespace IMS.Api.Controllers
 {
@@ -126,6 +128,26 @@ namespace IMS.Api.Controllers
                 return BadRequest(result);
                 
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("me")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+
+            if (string.IsNullOrEmpty(email))
+                return Unauthorized(new { Message = "Invalid token: missing email." });
+
+            var name = User.FindFirst(ClaimTypes.Name)?.Value;
+            var roleName = User.FindFirst(ClaimTypes.Role)?.Value;
+
+            return Ok(new
+            {
+                Email = email,
+                Name = name,
+                RoleName = roleName
+            });
         }
 
         private void SetAccessTokenCookie(string accessToken)

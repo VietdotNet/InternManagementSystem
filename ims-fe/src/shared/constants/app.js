@@ -31,11 +31,11 @@ export const LESSON_STATUS = {
 };
 
 export const REVIEW_STATUS = {
-  PENDING: "Pending",
-  PASSED: "Passed",
-  NOT_PASSED: "NotPassed",
+  PENDING: 'Pending',
+  PASSED: 'Passed',
+  NOT_PASSED: 'NotPassed',
+  IN_REVIEW: 'InReview',
 };
-
 export const PROGRAM_STATUS = {
   ONGOING: "Ongoing",
   COMPLETED: "Completed",

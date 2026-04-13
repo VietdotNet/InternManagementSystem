@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getEmailError, getPasswordError } from "../../../shared/utils/validation";
 import { login } from "../services/authService";
-
+import { getCurrentUser } from "@/shared/utils/authApi";
 const INITIAL_STATE = {
   email: "",
   password: "",
@@ -50,9 +50,18 @@ export function useLoginForm() {
     setLoginError("");
 
     try {
-    await login(formData); //CALL API
+    await login(formData);
 
-    return { success: true };
+    const me = await getCurrentUser();
+
+    return {
+      success: true,
+      user: {
+        email: me.email,
+        name: me.name,
+        role: me.roleName
+      }
+    };
 
     } catch (err) {
       const message =

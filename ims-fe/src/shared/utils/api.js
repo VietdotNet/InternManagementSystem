@@ -13,33 +13,42 @@ axiosClient.interceptors.response.use(
   async err => {
     const originalRequest = err.config;
 
-    if (err.response?.status === 401 && 
-      !originalRequest._retry && 
-      !originalRequest.url.includes("/auth/refresh-token") &&
-      !originalRequest.url.includes("/auth/login")) {
+     if (
+      originalRequest.url.includes("/auth/login") ||
+      originalRequest.url.includes("/auth/refresh-token") ||
+      originalRequest.url.includes("/auth/me")
+    ) {
+      return Promise.reject(err);
+    }
+
+    // ❗ chỉ xử lý 401
+    if (err.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        // Nếu chưa refresh thì gọi
+        // ❗ chỉ refresh khi đã login (có cookie)
+        if (!document.cookie) {
+          return Promise.reject(err);
+        }
+
         if (!isRefreshing) {
           isRefreshing = true;
           refreshPromise = axiosClient.post("/auth/refresh-token");
         }
 
-        // Các request khác sẽ chờ thằng này
         await refreshPromise;
 
         isRefreshing = false;
         refreshPromise = null;
 
-        // retry request cũ
         return axiosClient(originalRequest);
 
       } catch (refreshError) {
         isRefreshing = false;
         refreshPromise = null;
 
-        window.location.href = "/login";
+        console.log("Session expired");
+
         return Promise.reject(refreshError);
       }
     }
