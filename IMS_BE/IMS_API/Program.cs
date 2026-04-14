@@ -3,6 +3,7 @@ using DotNetEnv;
 using IMS.Infrastructure;
 using IMS.Infrastructure.DependencyInjection;
 using IMS.Infrastructure.Persistence;
+using IMS.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 
 namespace IMS_API
@@ -19,6 +20,7 @@ namespace IMS_API
             builder.Services.AddInfrastructure(builder.Configuration);
 
             builder.Configuration.AddEnvironmentVariables();
+            builder.Services.Configure<MailSetting>(builder.Configuration.GetSection("MailSettings"));
 
             builder.Services.AddControllers();
 
@@ -46,7 +48,10 @@ namespace IMS_API
                     services.GetRequiredService<UserManager<AppUser>>());
             }
 
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();

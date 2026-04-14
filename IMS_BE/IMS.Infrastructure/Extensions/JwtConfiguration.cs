@@ -43,7 +43,6 @@ namespace IMS.Infrastructure.Extensions
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
-
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = jwtSettings.Issuer,
                     ValidAudience = jwtSettings.Audience,
@@ -55,14 +54,7 @@ namespace IMS.Infrastructure.Extensions
                 {
                     OnMessageReceived = context =>
                     {
-                        var accessToken = context.Request.Query["access_token"];
-
-                        var path = context.HttpContext.Request.Path;
-                        if (!string.IsNullOrEmpty(accessToken) &&
-                            (path.StartsWithSegments("/chatHub"))) 
-                        {
-                            context.Token = accessToken;
-                        }
+                        context.Token = context.Request.Cookies["access_token"];
                         return Task.CompletedTask;
                     }
                 };

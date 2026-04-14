@@ -1,4 +1,5 @@
 ﻿using IMS.Application.Interfaces.Persistence;
+using IMS.Application.Interfaces.Repositories;
 using IMS.Application.Interfaces.Services;
 using IMS.Infrastructure.Extensions;
 using IMS.Infrastructure.Repositories;
@@ -13,14 +14,21 @@ namespace IMS.Infrastructure.DependencyInjection
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddIdentityConfiguration(configuration)
-                    .AddJwtAuthentication(configuration);
+                    .AddJwtAuthentication(configuration)
+                    .AddCorsPolicy(configuration);
 
 
             // repositories
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>(); 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProgramTrainingRepository, ProgramTrainingRepository>();
 
             // services
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProgramTrainingService, ProgramTrainingService>();
+
+            services.AddTransient<IEmailService, EmailService>();
 
             return services;
         }
