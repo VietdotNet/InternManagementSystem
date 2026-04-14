@@ -6,7 +6,7 @@ export function ProtectedRoute({ component: Component, roles, ...rest }) {
   const { user, loading } = useAuth();
   const [location, navigate] = useLocation();
 
-  // ✅ redirect trong useEffect
+  // Redirect trong useEffect
   useEffect(() => {
     if (!loading && !user && location !== "/login") {
       navigate("/login");
@@ -19,7 +19,7 @@ export function ProtectedRoute({ component: Component, roles, ...rest }) {
       component={(params) => {
         if (loading) return <div>Loading...</div>;
 
-        // ❗ không navigate ở đây nữa
+        // Không navigate ở đây nữa
         if (!user) return null;
 
         if (roles && !roles.includes(user.role)) {

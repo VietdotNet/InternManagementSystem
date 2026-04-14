@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ROUTES } from '../constants/app.js';
 import { mockUser } from '../store/mockData.js';
+import { logout } from "../../features/auth/services/authService";
+import { useAuth } from "@/shared/context/AuthContext";
 
 const NAV_ITEMS = [
   {
     label: 'Dashboard',
-    path: ROUTES.DASHBOARD,
+    path: "/intern",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -15,7 +16,7 @@ const NAV_ITEMS = [
   },
   {
     label: 'Lộ trình đào tạo',
-    path: ROUTES.TRAINING,
+    path: "/roadmap",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
@@ -24,7 +25,7 @@ const NAV_ITEMS = [
   },
   {
     label: 'Yêu cầu kiểm tra',
-    path: ROUTES.REVIEW_REQUESTS,
+    path: "/reviews",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -33,9 +34,21 @@ const NAV_ITEMS = [
   },
 ];
 
-export default function InternLayout({ children, onLogout }) {
-  const [location] = useLocation();
+export default function InternLayout({ children}) {
+  const [location, navigate] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { setUser } = useAuth();
+
+    const handleLogout = async () => {
+    try {
+      await logout(); 
+    } catch (err) {
+      console.error("Logout error:", err);
+    } finally {
+      setUser(null);
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden">
@@ -85,19 +98,19 @@ export default function InternLayout({ children, onLogout }) {
           {NAV_ITEMS.map((item) => {
             const active = location === item.path || (item.path !== '/' && location.startsWith(item.path));
             return (
-              <Link key={item.path} href={item.path}>
-                <a
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
-                    active
-                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30'
-                      : 'text-white/60 hover:text-white hover:bg-white/10'
-                  }`}
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  {item.icon}
-                  {item.label}
-                </a>
-              </Link>
+            <Link
+  key={item.path}
+  href={item.path}
+  className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium ${
+    active
+      ? 'bg-blue-600 text-white'
+      : 'text-white/60 hover:text-white hover:bg-white/10'
+  }`}
+  onClick={() => setSidebarOpen(false)}
+>
+  {item.icon}
+  {item.label}
+</Link>
             );
           })}
         </nav>
@@ -105,7 +118,7 @@ export default function InternLayout({ children, onLogout }) {
         {/* Logout */}
         <div className="px-4 py-4 border-t border-white/10">
           <button
-            onClick={onLogout}
+            onClick={handleLogout}
             className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-white/60 hover:text-white hover:bg-red-600/20 transition-all"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

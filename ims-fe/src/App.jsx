@@ -15,7 +15,6 @@ import StatisticsPage from "@/features/statistics/pages/StatisticsPage";
 import  InternLayout  from "@/shared/components/InternLayout";
 import InternDashboardPage from "@/features/interns/dashboard/pages/InternDashboardPage";
 import  RoadmapPage  from "@/features/interns/roadmap/pages/RoadmapPage";
-import { ReviewsPage } from "@/features/interns/reviews/pages/ReviewsPage";
 import  ReviewDetailPage  from "@/features/interns/review-detail/pages/ReviewDetailPage";
 
 import { ProtectedRoute } from "@/shared/components/ProtectedRoute";
@@ -44,7 +43,7 @@ function InternRoutes() {
       <Switch>
         <Route path="/intern" component={InternDashboardPage} />
         <Route path="/roadmap" component={RoadmapPage} />
-        <Route path="/reviews" component={ReviewsPage} />
+        <Route path="/reviews" component={ReviewDetailPage} />
         <Route path="/review/:id" component={ReviewDetailPage} />
 
         <Route component={InternDashboardPage} />

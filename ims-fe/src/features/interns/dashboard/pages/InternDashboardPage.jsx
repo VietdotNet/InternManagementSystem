@@ -132,8 +132,11 @@ export default function InternDashboardPage() {
         <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <h3 className="font-semibold text-gray-900">Yêu cầu kiểm tra gần đây</h3>
-            <Link href={ROUTES.REVIEW_REQUESTS}>
-              <a className="text-sm text-blue-600 hover:underline">Xem tất cả</a>
+            <Link
+              href={ROUTES.REVIEW_REQUESTS}
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Xem tất cả
             </Link>
           </div>
           <div className="divide-y divide-gray-50">
@@ -172,8 +175,7 @@ function StatCard({ icon, label, value, color }) {
 
 function QuickAction({ href, icon, title, desc, color }) {
   return (
-    <Link href={href}>
-      <a className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all flex items-start gap-4 group">
+    <Link href={href} className="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md hover:border-blue-200 transition-all flex items-start gap-4 group">
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${color} flex-shrink-0 group-hover:scale-110 transition-transform`}>
           {icon}
         </div>
@@ -181,7 +183,6 @@ function QuickAction({ href, icon, title, desc, color }) {
           <h4 className="font-semibold text-gray-900 text-sm">{title}</h4>
           <p className="text-xs text-gray-500 mt-1 leading-relaxed">{desc}</p>
         </div>
-      </a>
     </Link>
   );
 }

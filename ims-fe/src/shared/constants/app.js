@@ -10,6 +10,8 @@ export const ROUTES = {
   EVALUATIONS: "/evaluations",
   REPORTS: "/reports",
   SETTINGS: "/settings",
+   TRAINING: '/training',
+  REVIEW_REQUESTS: '/review-requests',
 };
 
 export const ROLES = {
