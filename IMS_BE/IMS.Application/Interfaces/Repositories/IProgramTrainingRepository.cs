@@ -16,6 +16,8 @@ namespace IMS.Application.Interfaces.Repositories
         Task<ProgramTraining?> GetByIdAsync(int programId);
         Task<List<ProgramItemResponse>> GetAllProgramAsync();
         Task<List<TrackItemResponse>> GetTracksByProgramAsync(int programId);
+        Task<List<ProgramItemResponse>> GetProgramByMentorIdAsync(string mentorId);
+        Task<ProgramTraining?> GetDetailByIdAsync(int programId);
         Task SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

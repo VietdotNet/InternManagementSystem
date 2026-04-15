@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getReviewRequests, mockProgram } from '../../../../shared/store/mockData.js';
+import { getReviewRequests, mockPrograms } from '../../../../shared/store/mockData.js';
 import StatusBadge from '../../../../shared/components/StatusBadge.jsx';
 import ReviewDetailModal from '../components/ReviewDetailModal.jsx';
 
@@ -19,7 +19,7 @@ export default function ReviewDetailPage() {
     setReviews(getReviewRequests());
   }
 
-  const tracks = mockProgram.tracks.map((t) => t.name);
+  const tracks = mockPrograms.tracks.map((t) => t.name);
 
   const filtered = reviews.filter((r) => {
     if (filter.track && r.trackName !== filter.track) return false;

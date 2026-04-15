@@ -1,10 +1,13 @@
 ﻿using IMS.Application.DTOs.ProgramTraning;
 using IMS.Application.Interfaces.Services;
+using IMS.Infrastructure;
 using IMS.Infrastructure.Services;
 using IMS_API;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace IMS.Api.Controllers
 {
@@ -14,13 +17,16 @@ namespace IMS.Api.Controllers
     {
         private readonly IProgramTrainingService _programTrainingService;
         private readonly IUserService _userService;
+        private readonly UserManager<AppUser> _userManager;
 
         public ProgramTrainingController(
             IProgramTrainingService programTrainingService,
-            IUserService userService)
+            IUserService userService,
+            UserManager<AppUser> userManager)
         {
             _programTrainingService = programTrainingService;
             _userService = userService;
+            _userManager = userManager;
         }
 
         [HttpGet("{id}")]
@@ -39,6 +45,31 @@ namespace IMS.Api.Controllers
         {
             var programs = await _programTrainingService.GetAllProgramAsync();
             return Ok(programs);
+        }
+
+        [Authorize(Roles = "Mentor")]
+        [HttpGet("by-mentor")]
+        public async Task<IActionResult> GetProgramsByMentorAsync()
+        {
+            var mentorId =  _userManager.GetUserId(User);
+            if(mentorId == null)
+                return Unauthorized();
+
+            var programs = await _programTrainingService.GetProgramsByMentorIdAsync(mentorId);
+
+            return Ok(programs);
+        }
+
+        [Authorize(Roles = "Mentor")]
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> DetailAsync(int id)
+        {
+            var result = await _programTrainingService.GetProgramDetailAsync(id);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
         }
 
         [Authorize(Roles = "Admin")]

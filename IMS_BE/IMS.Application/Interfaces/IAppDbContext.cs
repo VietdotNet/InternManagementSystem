@@ -1,5 +1,6 @@
 ﻿using IMS.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace IMS.Application.Interfaces
         DbSet<ReviewRequest> ReviewRequests { get; set; }
         DbSet<Notification> Notifications { get; set; }
         DbSet<RefreshToken> RefreshTokens { get; set; }
+
+        EntityEntry Entry(object entity);
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

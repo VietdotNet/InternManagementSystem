@@ -132,7 +132,7 @@ namespace IMS.Api.Controllers
 
         [Authorize]
         [HttpGet("me")]
-        public async Task<IActionResult> GetCurrentUser()
+        public IActionResult GetCurrentUser()
         {
             var email = User.FindFirst(ClaimTypes.Email)?.Value;
 

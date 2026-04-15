@@ -22,11 +22,13 @@ namespace IMS.Infrastructure.DependencyInjection
             services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>(); 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProgramTrainingRepository, ProgramTrainingRepository>();
+            services.AddScoped<ILessonRepository, LessonRepository>();
 
             // services
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProgramTrainingService, ProgramTrainingService>();
+            services.AddScoped<ILessonService, LessonService>();
 
             services.AddTransient<IEmailService, EmailService>();
 

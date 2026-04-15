@@ -1,33 +1,25 @@
-import { Route, useLocation } from "wouter";
+import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
 
-export function ProtectedRoute({ component: Component, roles, ...rest }) {
+export function ProtectedRoute({ children, roles }) {
   const { user, loading } = useAuth();
-  const [location, navigate] = useLocation();
+  const location = useLocation();
 
-  // Redirect trong useEffect
-  useEffect(() => {
-    if (!loading && !user && location !== "/login") {
-      navigate("/login");
-    }
-  }, [user, loading, location]);
+  // Loading
+  if (loading) {
+    return <div>Thinking...</div>;
+  }
 
-  return (
-    <Route
-      {...rest}
-      component={(params) => {
-        if (loading) return <div>Loading...</div>;
+  // Chưa login → redirect
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
-        // Không navigate ở đây nữa
-        if (!user) return null;
+  // Sai role → 403
+  if (roles && !roles.includes(user.role)) {
+    return <div>403 - Forbidden</div>;
+  }
 
-        if (roles && !roles.includes(user.role)) {
-          return <div>403 - Forbidden</div>;
-        }
-
-        return <Component {...params} />;
-      }}
-    />
-  );
+  // OK
+  return children;
 }

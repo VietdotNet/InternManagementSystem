@@ -1,6 +1,5 @@
-import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/shared/components/ui/toaster";
+import { Toaster } from "react-hot-toast";
 import { TooltipProvider } from "@/shared/components/ui/tooltip";
 import LoginPage from "@/features/auth/pages/LoginPage";
 import AdminLayout from "@/shared/components/AdminLayout";
@@ -17,62 +16,73 @@ import InternDashboardPage from "@/features/interns/dashboard/pages/InternDashbo
 import  RoadmapPage  from "@/features/interns/roadmap/pages/RoadmapPage";
 import  ReviewDetailPage  from "@/features/interns/review-detail/pages/ReviewDetailPage";
 
+import MentorLayout from '@/shared/components/MentorLayout';
+import ProgramsListPage from '@/features/mentor/programs/pages/ProgramsListPage';
+import ProgramDetailPage from '@/features/mentor/program-detail/pages/ProgramDetailPage';
+
 import { ProtectedRoute } from "@/shared/components/ProtectedRoute";
 import { AuthProvider } from "@/shared/context/AuthContext";
 
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
 const queryClient = new QueryClient();
 
-function AdminRoutes() {
-  return (
-    <AdminLayout>
-      <Switch>
-        <Route path="/dashboard" component={DashboardPage} />
-        <Route path="/programs/create" component={CreateProgramPage} />
-        <Route path="/programs" component={TrainingProgramsPage} />
-        <Route path="/users/create" component={CreateUserPage} />
-        <Route path="/users" component={UsersPage} />
-        <Route path="/statistics" component={StatisticsPage} />
-      </Switch>
-    </AdminLayout>
-  );
-}
+function AppRouter() {
+ return (
+    <Routes>
+      {/* Public */}
+      <Route path="/login" element={<LoginPage />} />
 
-function InternRoutes() {
-  return (
-    <InternLayout>
-      <Switch>
-        <Route path="/intern" component={InternDashboardPage} />
-        <Route path="/roadmap" component={RoadmapPage} />
-        <Route path="/reviews" component={ReviewDetailPage} />
-        <Route path="/review/:id" component={ReviewDetailPage} />
+      {/* Admin */}
+      <Route
+        element={
+          <ProtectedRoute roles={["Admin"]}>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/programs" element={<TrainingProgramsPage />} />
+        <Route path="/programs/create" element={<CreateProgramPage />} />
+        <Route path="/users" element={<UsersPage />} />
+        <Route path="/users/create" element={<CreateUserPage />} />
+        <Route path="/statistics" element={<StatisticsPage />} />
+      </Route>
 
-        <Route component={InternDashboardPage} />
-      </Switch>
-    </InternLayout>
-  );
-}
+       {/* Mentor */}
+      <Route
+        element={
+          <ProtectedRoute roles={["Mentor"]}>
+            <MentorLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/mentor/programs" element={<ProgramsListPage />} />
+        <Route path="/mentor/programs/:id" element={<ProgramDetailPage />} />
+      </Route>
 
-function Router() {
-  return (
-     <Switch>
-      <Route path="/login" component={LoginPage} />
+      {/* Intern */}
+      <Route
+        element={
+          <ProtectedRoute roles={["Intern"]}>
+            <InternLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route path="/intern" element={<InternDashboardPage />} />
+        <Route path="/roadmap" element={<RoadmapPage />} />
+        <Route path="/reviews" element={<ReviewDetailPage />} />
+        <Route path="/review/:id" element={<ProgramDetailPage />} />
+      </Route>
 
-       {/* Admin */}
-      <ProtectedRoute path="/dashboard" component={AdminRoutes} roles={["Admin"]} />
-      <ProtectedRoute path="/programs" component={AdminRoutes} roles={["Admin"]} />
-      <ProtectedRoute path="/programs/create" component={AdminRoutes} roles={["Admin"]} />
-      <ProtectedRoute path="/users" component={AdminRoutes} roles={["Admin"]} />
-      <ProtectedRoute path="/users/create" component={AdminRoutes} roles={["Admin"]} />
-      <ProtectedRoute path="/statistics" component={AdminRoutes} roles={["Admin"]}/>
-
-      <ProtectedRoute path="/intern" component={InternRoutes} roles={["Intern"]} />
-      <ProtectedRoute path="/roadmap" component={InternRoutes} roles={["Intern"]} />
-      <ProtectedRoute path="/reviews" component={InternRoutes} roles={["Intern"]} />
-      <ProtectedRoute path="/review/:id" component={InternRoutes} roles={["Intern"]}/>
-
-      {/* Default fallback */}
-      <Route path="/" component={LoginPage} />
-    </Switch>
+      {/* Default */}
+      <Route path="/" element={<Navigate to="/login" />} />
+    </Routes>
   );
 }
 
@@ -80,12 +90,15 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AuthProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        </AuthProvider>
-        <Toaster />
+        <BrowserRouter>
+          <AuthProvider>
+             <Toaster
+              position="top-right"
+              containerStyle={{ zIndex: 9999 }}
+            />
+            <AppRouter />
+          </AuthProvider>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   );

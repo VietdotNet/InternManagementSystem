@@ -1,4 +1,4 @@
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import { useLoginForm } from "../hooks/useLoginForm";
 import LoginHeader from "../components/LoginHeader";
 import LoginForm from "../components/LoginForm";
@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { useAuth } from "@/shared/context/AuthContext";
 
 function LoginPage() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   const { user, setUser } = useAuth();
 
   const {
@@ -37,11 +37,13 @@ function LoginPage() {
   if (!user) return;
 
   if (user.role === "Admin") {
-    navigate("/dashboard");
+    navigate("/dashboard", { replace: true });
   } else if (user.role === "Intern") {
-    navigate("/intern");
+    navigate("/intern", { replace: true });
+  } else if (user.role === "Mentor") {
+    navigate("/mentor/programs", { replace: true });
   }
-}, [user]);
+}, [user, navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 flex items-center justify-center p-4 sm:p-6 lg:p-8">
