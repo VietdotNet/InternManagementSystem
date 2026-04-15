@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft, CheckCheck, ChevronDown } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import { useCreateUser } from "../hooks/useUsers";
@@ -54,7 +54,7 @@ function FormSelect({ label, name, value, onChange, error, options, placeholder,
 }
 
 function CreateUserPage() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   const {
     form, errors, loading, success, programs, availablePositions,
     handleChange, handleSubmit, resetSuccess,

@@ -1,4 +1,4 @@
-import { useLocation } from "wouter";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import { APP_NAME } from "../constants/app";
 import {
@@ -43,36 +43,63 @@ const NAV_GROUPS = [
   },
 ];
 
-function NavItem({ icon: Icon, label, href, active }) {
-  const [, navigate] = useLocation();
+function NavItem({ icon: Icon, label, href }) {
   return (
-    <button
-      onClick={() => navigate(href)}
-      className={cn(
-        "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group text-left",
-        active
-          ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
-          : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
-      )}
+    <NavLink
+      to={href}
+      className={({ isActive }) =>
+        cn(
+          "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 group",
+          isActive
+            ? "bg-indigo-600 text-white shadow-md shadow-indigo-200"
+            : "text-slate-600 hover:bg-slate-100 hover:text-slate-800"
+        )
+      }
     >
-      <Icon className={cn("w-4 h-4 flex-shrink-0", active ? "text-white" : "text-slate-400 group-hover:text-slate-600")} />
-      <span className="flex-1 truncate">{label}</span>
-      {active && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
-    </button>
+      {({ isActive }) => (
+        <>
+          <Icon
+            className={cn(
+              "w-4 h-4",
+              isActive ? "text-white" : "text-slate-400 group-hover:text-slate-600"
+            )}
+          />
+          <span className="flex-1 truncate">{label}</span>
+          {isActive && <ChevronRight className="w-3.5 h-3.5 opacity-60" />}
+        </>
+      )}
+    </NavLink>
   );
 }
 
 function Sidebar({ onLogout }) {
-  const [location] = useLocation();
+ const navigate = useNavigate();
+ const location = useLocation();
+ const pathname = location.pathname;
 
-  function isActive(href) {
-    if (href === "/dashboard") return location === "/dashboard" || location === "/";
-    if (href === "/programs/create") return location === "/programs/create";
-    if (href === "/programs") return location === "/programs" && location !== "/programs/create";
-    if (href === "/users/create") return location === "/users/create";
-    if (href === "/users") return location === "/users" && location !== "/users/create";
-    return location.startsWith(href);
+ function isActive(href) {
+  if (href === "/dashboard") {
+    return pathname === "/dashboard" || pathname === "/";
   }
+
+  if (href === "/programs/create") {
+    return pathname === "/programs/create";
+  }
+
+  if (href === "/programs") {
+    return pathname === "/programs";
+  }
+
+  if (href === "/users/create") {
+    return pathname === "/users/create";
+  }
+
+  if (href === "/users") {
+    return pathname === "/users";
+  }
+
+  return pathname.startsWith(href);
+}
 
   return (
     <aside className="w-64 flex-shrink-0 flex flex-col bg-white border-r border-slate-200 h-full">

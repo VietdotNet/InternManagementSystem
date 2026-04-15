@@ -1,8 +1,10 @@
-﻿using IMS.Application.DTOs.ProgramTraning;
+﻿using IMS.Application.DTOs.ManageUser;
+using IMS.Application.DTOs.ProgramTraning;
 using IMS.Application.Interfaces.Repositories;
 using IMS.Application.Interfaces.Services;
 using IMS.Domain.Entities;
 using IMS.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -123,9 +125,57 @@ namespace IMS.Infrastructure.Services
             return await _programTrainingRepo.GetByIdAsync(programId);
         }
 
+        public async Task<List<ProgramItemResponse>> GetProgramsByMentorIdAsync(string mentorId)
+        {
+            return await _programTrainingRepo.GetProgramByMentorIdAsync(mentorId);
+        }
+
         public async Task<List<TrackItemResponse>> GetTracksByProgramAsync(int programId)
         {
             return await _programTrainingRepo.GetTracksByProgramAsync(programId);
+        }
+
+        public async Task<DetailProgramResponse> GetProgramDetailAsync(int programId)
+        {
+            var program = await _programTrainingRepo.GetDetailByIdAsync(programId);
+
+            if (program == null) 
+                return null;
+
+            return new DetailProgramResponse
+            {
+                ProgramId = program.Id,
+                ProgramName = program.Name,
+                StartDate = program.StartDate,
+                EndDate = program.EndDate,
+                IsClosed = program.IsClosed,
+
+                InternCount = program.ProgramTracks
+                .SelectMany(t => t.Interns)
+                .Count(),
+
+                Tracks = program.ProgramTracks
+                .Select(t => new ProgramTrackResponse
+                {
+                    TrackId = t.Id,
+                    TrackName = t.Name,
+
+                    Interns = (
+                    from i in _context.Interns
+                    join u in _context.Users
+                        on i.UserId equals u.Id
+                    where i.ProgramTrackId == t.Id
+                    select new InternItemResponse
+                    {
+                        FullName = u.FullName,
+                        Email = u.Email,
+                        JoinDate = i.JoinDate,
+                        Status = i.Status
+                    }
+                ).ToList()
+
+                }).ToList()
+            };
         }
     }
 }

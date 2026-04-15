@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 
 import {
   Plus, Search, Trash2, MoreVertical, Mail, Briefcase, ChevronDown, Users, GraduationCap,
@@ -127,7 +127,7 @@ function EmptyState({ onCreateClick }) {
 }
 
 function UsersPage() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   const { users, loading, deleteUser, toggleStatus } = useUsers();
   const [search, setSearch] = useState("");
   const [roleTab, setRoleTab] = useState("all");

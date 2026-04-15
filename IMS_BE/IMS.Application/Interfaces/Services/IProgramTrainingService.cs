@@ -14,6 +14,8 @@ namespace IMS.Application.Interfaces.Services
         Task<List<ProgramItemResponse>> GetAllProgramAsync();
         Task<ProgramTraining?> GetByIdAsync(int programId);
         Task<List<TrackItemResponse>> GetTracksByProgramAsync(int programId);
+        Task<List<ProgramItemResponse>> GetProgramsByMentorIdAsync(string mentorId);
+        Task<DetailProgramResponse> GetProgramDetailAsync(int programId);
         Task CloseProgramAsync(int programId);
     }
 }

@@ -1,4 +1,4 @@
-
+﻿
 using DotNetEnv;
 using IMS.Infrastructure;
 using IMS.Infrastructure.DependencyInjection;
@@ -23,6 +23,12 @@ namespace IMS_API
             builder.Services.Configure<MailSetting>(builder.Configuration.GetSection("MailSettings"));
 
             builder.Services.AddControllers();
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("MainMentor", policy => policy.RequireRole("Mentor")
+                .RequireClaim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", "Lê Thị Khánh Linh", "Nguyễn Thị Hà")); 
+            });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

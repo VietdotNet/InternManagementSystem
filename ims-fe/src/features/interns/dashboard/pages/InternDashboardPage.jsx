@@ -1,5 +1,5 @@
 import { Link } from 'wouter';
-import { mockProgram, mockUser, getReviewRequests } from '../../../../shared/store/mockData.js';
+import { mockPrograms, mockUser, getReviewRequests } from '../../../../shared/store/mockData.js';
 import { ROUTES } from '../../../../shared/constants/app.js';
 import StatusBadge from '../../../../shared/components/StatusBadge.jsx';
 
@@ -14,7 +14,7 @@ function calcCompletion(tracks) {
 }
 
 export default function InternDashboardPage() {
-  const program = mockProgram;
+  const program = mockPrograms;
   const reviews = getReviewRequests();
   const completion = calcCompletion(program.tracks);
 

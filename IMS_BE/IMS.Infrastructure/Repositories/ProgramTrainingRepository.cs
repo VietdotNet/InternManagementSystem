@@ -42,6 +42,18 @@ namespace IMS.Infrastructure.Repositories
                 .FindAsync(programId);
         }
 
+        public async Task<ProgramTraining?> GetDetailByIdAsync(int programId)
+        {
+            return await _context.ProgramTrainings
+            .AsNoTracking()
+            .Include(p => p.ProgramTracks)
+                .ThenInclude(t => t.Lessons)
+                    .ThenInclude(l => l.ReviewRequests)
+            .Include(p => p.ProgramTracks)
+              .ThenInclude(t => t.Interns)
+            .FirstOrDefaultAsync(p => p.Id == programId);
+        }
+
         public async Task<List<ProgramItemResponse>> GetAllProgramAsync()
         {
             return await _context.ProgramTrainings
@@ -84,6 +96,25 @@ namespace IMS.Infrastructure.Repositories
                    Name = x.Name,
                })
                .ToListAsync();
+        }
+
+        public async Task<List<ProgramItemResponse>> GetProgramByMentorIdAsync(string mentorId)
+        {
+            return await _context.ProgramTrainings
+             .AsNoTracking()
+             .Where(p => p.ProgramMentors.Any(m => m.UserId == mentorId))
+             .Select(m => new ProgramItemResponse
+             {
+                 ProgramId = m.Id,
+                 ProgramName = m.Name,
+                 StartDate = m.StartDate,
+                 EndDate = m.EndDate,
+                 InternCount = m.ProgramTracks
+                        .SelectMany(t => t.Interns)
+                        .Count(),
+                 IsClosed = m.IsClosed,
+             })
+             .ToListAsync();
         }
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken)

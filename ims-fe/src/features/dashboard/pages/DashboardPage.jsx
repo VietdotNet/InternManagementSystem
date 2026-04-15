@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import {
   Users, BookOpen, GraduationCap, TrendingUp, UserCheck,
   ArrowUpRight, CalendarDays, Clock, ChevronRight, Plus,
@@ -50,7 +50,7 @@ function QuickActionCard({ icon: Icon, label, desc, onClick, color }) {
 }
 
 function DashboardPage() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   const [stats, setStats] = useState({});
   const [programs, setPrograms] = useState([]);
   const [recentUsers, setRecentUsers] = useState([]);

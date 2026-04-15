@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import {
   Plus, Search, MoreVertical, Trash2, Edit2, BookOpen, CalendarDays, Users,
   ChevronDown, Filter,
@@ -126,7 +126,7 @@ function ProgramCard({ program, onDelete, onStatusChange }) {
 }
 
 function TrainingProgramsPage() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   const { programs, loading, deleteProgram, updateProgramStatus } = useTrainingPrograms();
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");

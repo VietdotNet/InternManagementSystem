@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { mockProgram, addReviewRequest } from '../../../../shared/store/mockData.js';
+import { mockPrograms, addReviewRequest } from '../../../../shared/store/mockData.js';
 import StatusBadge from '../../../../shared/components/StatusBadge.jsx';
 import TrackSection from '../components/TrackSection.jsx';
 import RequestReviewModal from '../components/RequestReviewModal.jsx';
@@ -15,7 +15,7 @@ function calcCompletion(tracks) {
 }
 
 export default function RoadmapPage() {
-  const [program] = useState(mockProgram);
+  const [program] = useState(mockPrograms);
   const [requestModal, setRequestModal] = useState(null);
   const [toast, setToast] = useState('');
 

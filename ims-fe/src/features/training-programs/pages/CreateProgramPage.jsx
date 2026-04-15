@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "wouter";
+import { useNavigate } from "react-router-dom";
 import { Plus, X, BookOpen, Users, Layers, CheckCheck, ArrowLeft } from "lucide-react";
 import { cn } from "../../../lib/utils";
 import { useCreateProgram } from "../hooks/useTrainingPrograms";
@@ -39,9 +39,10 @@ function FormInput({ label, name, type = "text", value, onChange, error, placeho
 }
 
 function CreateProgramPage() {
-  const [, navigate] = useLocation();
+  const navigate = useNavigate();
   const [mentors, setMentors] = useState([]);
-  const [setLoadingMentors] = useState(true);
+  const [loadingMentors, setLoadingMentors] = useState(true);
+  const [error, setError] = useState(null);
   const {
     form, errors, loading, success, newTrack,
     handleChange, toggleMentor, addTrack, removeTrack, setNewTrack, handleSubmit, resetSuccess,
@@ -74,7 +75,7 @@ function CreateProgramPage() {
     if (success) {
       const timer = setTimeout(() => {
         resetSuccess();
-        navigate("/programs");
+        navigate("/programs", { replace: true });
       }, 1800);
       return () => clearTimeout(timer);
     }

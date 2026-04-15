@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useLocation } from "wouter"; 
+import { useLocation } from "react-router-dom";
 import { getCurrentUser } from "../utils/authApi";
 
 const AuthContext = createContext();
@@ -7,34 +7,48 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [location] = useLocation(); // lấy route hiện tại
+  const location = useLocation();
 
   useEffect(() => {
+    let isMounted = true;
+
     async function fetchUser() {
       try {
-        if (location === "/login" || location === "/") {
-          setLoading(false);
-          setUser(null);
+        // Không gọi API ở trang public
+        if (location.pathname === "/login") {
+          if (isMounted) {
+            setUser(null);
+            setLoading(false);
+          }
           return;
         }
 
         const me = await getCurrentUser();
 
-        setUser({
-          email: me.email,
-          name: me.name,
-          role: me.roleName
-        });
-
+        if (isMounted) {
+          setUser({
+            email: me.email,
+            name: me.name,
+            role: me.roleName,
+          });
+        }
       } catch (err) {
-        setUser(null);
+        if (isMounted) {
+          setUser(null);
+        }
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     }
 
     fetchUser();
-  }, [location]);
+
+    return () => {
+      isMounted = false;
+    };
+  }, [location.pathname]);
 
   return (
     <AuthContext.Provider value={{ user, setUser, loading }}>

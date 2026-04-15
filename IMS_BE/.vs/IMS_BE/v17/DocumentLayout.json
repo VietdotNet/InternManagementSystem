@@ -3,32 +3,56 @@
   "WorkspaceRootPath": "D:\\DEHA\\IMS\\IMS_BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|d:\\deha\\ims\\ims_be\\ims.infrastructure\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|solutionrelative:ims.infrastructure\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|d:\\deha\\ims\\ims_be\\ims.infrastructure\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|solutionrelative:ims.infrastructure\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\controllers\\lessoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\controllers\\programtrainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\controllers\\programtrainingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|d:\\deha\\ims\\ims_be\\ims.infrastructure\\repositories\\lessonrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|solutionrelative:ims.infrastructure\\repositories\\lessonrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|d:\\deha\\ims\\ims_be\\ims.infrastructure\\services\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|solutionrelative:ims.infrastructure\\services\\lessonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|d:\\deha\\ims\\ims_be\\ims.infrastructure\\services\\programtrainingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|solutionrelative:ims.infrastructure\\services\\programtrainingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|d:\\deha\\ims\\ims_be\\ims.application\\dtos\\programtraning\\detailprogramresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|solutionrelative:ims.application\\dtos\\programtraning\\detailprogramresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EABEBB22-B5F0-4E7A-B891-5414252004CC}|IMS.Domain\\IMS.Domain.csproj|d:\\deha\\ims\\ims_be\\ims.domain\\enums\\internstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EABEBB22-B5F0-4E7A-B891-5414252004CC}|IMS.Domain\\IMS.Domain.csproj|solutionrelative:ims.domain\\enums\\internstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|d:\\deha\\ims\\ims_be\\ims.application\\dtos\\programtraning\\programtrackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|solutionrelative:ims.application\\dtos\\programtraning\\programtrackresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|d:\\deha\\ims\\ims_be\\ims.application\\interfaces\\services\\iprogramtrainingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|solutionrelative:ims.application\\interfaces\\services\\iprogramtrainingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|d:\\deha\\ims\\ims_be\\ims.application\\interfaces\\repositories\\ilessonrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8DA9A696-8672-46EF-9863-CB6147002CC3}|IMS.Application\\IMS.Application.csproj|solutionrelative:ims.application\\interfaces\\repositories\\ilessonrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|d:\\deha\\ims\\ims_be\\ims.infrastructure\\extensions\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A02C079A-F268-4A5F-A59C-98C00F18D550}|IMS.Infrastructure\\IMS.Infrastructure.csproj|solutionrelative:ims.infrastructure\\extensions\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -63,76 +87,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": ".env",
-              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\.env",
-              "RelativeDocumentMoniker": "IMS_API\\.env",
-              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\.env",
-              "RelativeToolTip": "IMS_API\\.env",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-04-14T02:15:50.321Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\appsettings.json",
-              "RelativeDocumentMoniker": "IMS_API\\appsettings.json",
-              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\appsettings.json",
-              "RelativeToolTip": "IMS_API\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-04-14T02:15:49.186Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "AuthService.cs",
               "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "IMS.Infrastructure\\Services\\AuthService.cs",
               "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Services\\AuthService.cs",
               "RelativeToolTip": "IMS.Infrastructure\\Services\\AuthService.cs",
-              "ViewState": "AQIAAHkAAAAAAAAAAAAkwNcAAAANAAAA",
+              "ViewState": "AQIAAMkAAAAAAAAAAAAowNQAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T03:43:25.824Z"
+              "WhenOpened": "2026-04-15T14:51:14.811Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "IMS.Infrastructure\\Services\\UserService.cs",
-              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Services\\UserService.cs",
-              "RelativeToolTip": "IMS.Infrastructure\\Services\\UserService.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAcwHoAAAAAAAAA",
+              "Title": "LessonService.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Services\\LessonService.cs",
+              "RelativeDocumentMoniker": "IMS.Infrastructure\\Services\\LessonService.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Services\\LessonService.cs",
+              "RelativeToolTip": "IMS.Infrastructure\\Services\\LessonService.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAAAkwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T03:01:00.805Z"
+              "WhenOpened": "2026-04-15T13:24:18.384Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "IMS_API\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\UserController.cs",
-              "RelativeToolTip": "IMS_API\\Controllers\\UserController.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAwDgAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-13T02:55:18.307Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "IMS_API\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "IMS_API\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAIQAAAAAAAAAAAAowJQAAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T02:31:49.058Z",
+              "DocumentIndex": 5,
+              "Title": ".env",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\.env",
+              "RelativeDocumentMoniker": "IMS_API\\.env",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\.env",
+              "RelativeToolTip": "IMS_API\\.env",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-15T09:00:22.051Z",
               "EditorCaption": ""
             },
             {
@@ -143,9 +131,121 @@
               "RelativeDocumentMoniker": "IMS.Infrastructure\\Services\\ProgramTrainingService.cs",
               "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Services\\ProgramTrainingService.cs",
               "RelativeToolTip": "IMS.Infrastructure\\Services\\ProgramTrainingService.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAIwCsAAAAJAAAA",
+              "ViewState": "AQIAAJIAAAAAAAAAAADwv5sAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-10T01:42:13.822Z"
+              "WhenOpened": "2026-04-15T04:39:45.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProgramTrainingController.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\ProgramTrainingController.cs",
+              "RelativeDocumentMoniker": "IMS_API\\Controllers\\ProgramTrainingController.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\ProgramTrainingController.cs",
+              "RelativeToolTip": "IMS_API\\Controllers\\ProgramTrainingController.cs",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAswDoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T02:54:00.374Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LessonController.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\LessonController.cs",
+              "RelativeDocumentMoniker": "IMS_API\\Controllers\\LessonController.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Controllers\\LessonController.cs",
+              "RelativeToolTip": "IMS_API\\Controllers\\LessonController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwB0AAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T02:35:53.085Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LessonRepository.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Repositories\\LessonRepository.cs",
+              "RelativeDocumentMoniker": "IMS.Infrastructure\\Repositories\\LessonRepository.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Repositories\\LessonRepository.cs",
+              "RelativeToolTip": "IMS.Infrastructure\\Repositories\\LessonRepository.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAA5wC4AAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T02:25:44.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IProgramTrainingService.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\Interfaces\\Services\\IProgramTrainingService.cs",
+              "RelativeDocumentMoniker": "IMS.Application\\Interfaces\\Services\\IProgramTrainingService.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\Interfaces\\Services\\IProgramTrainingService.cs",
+              "RelativeToolTip": "IMS.Application\\Interfaces\\Services\\IProgramTrainingService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T04:46:24.213Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DetailProgramResponse.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\DTOs\\ProgramTraning\\DetailProgramResponse.cs",
+              "RelativeDocumentMoniker": "IMS.Application\\DTOs\\ProgramTraning\\DetailProgramResponse.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\DTOs\\ProgramTraning\\DetailProgramResponse.cs",
+              "RelativeToolTip": "IMS.Application\\DTOs\\ProgramTraning\\DetailProgramResponse.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T06:44:28.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "InternStatus.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Domain\\Enums\\InternStatus.cs",
+              "RelativeDocumentMoniker": "IMS.Domain\\Enums\\InternStatus.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Domain\\Enums\\InternStatus.cs",
+              "RelativeToolTip": "IMS.Domain\\Enums\\InternStatus.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T08:14:14.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProgramTrackResponse.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\DTOs\\ProgramTraning\\ProgramTrackResponse.cs",
+              "RelativeDocumentMoniker": "IMS.Application\\DTOs\\ProgramTraning\\ProgramTrackResponse.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\DTOs\\ProgramTraning\\ProgramTrackResponse.cs",
+              "RelativeToolTip": "IMS.Application\\DTOs\\ProgramTraning\\ProgramTrackResponse.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T08:23:01.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Extensions\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "IMS.Infrastructure\\Extensions\\DependencyInjection.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Infrastructure\\Extensions\\DependencyInjection.cs",
+              "RelativeToolTip": "IMS.Infrastructure\\Extensions\\DependencyInjection.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAB4AAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T09:47:51.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ILessonRepository.cs",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\Interfaces\\Repositories\\ILessonRepository.cs",
+              "RelativeDocumentMoniker": "IMS.Application\\Interfaces\\Repositories\\ILessonRepository.cs",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS.Application\\Interfaces\\Repositories\\ILessonRepository.cs",
+              "RelativeToolTip": "IMS.Application\\Interfaces\\Repositories\\ILessonRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T09:30:32.58Z"
             }
           ]
         }
