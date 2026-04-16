@@ -1,4 +1,5 @@
-﻿using IMS.Application.DTOs.Auth;
+﻿using Google.Apis.Auth;
+using IMS.Application.DTOs.Auth;
 using IMS.Application.Interfaces.Persistence;
 using IMS.Application.Interfaces.Repositories;
 using IMS.Application.Interfaces.Services;
@@ -8,6 +9,8 @@ using IMS.Domain.Enums;
 using IMS.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -18,6 +21,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace IMS.Infrastructure.Services
@@ -26,24 +30,33 @@ namespace IMS.Infrastructure.Services
     {
         private readonly JwtSetting _jwt;
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IRefreshTokenRepository _refreshRepo;
         private readonly IUserRepository _userRepo;
+        private readonly IConfiguration _config;
 
         public AuthService
         (
             IOptions<JwtSetting> options,
             UserManager<AppUser> userManager,
             IRefreshTokenRepository refreshRepo,
-            IUserRepository userRepo
+            IUserRepository userRepo,
+            SignInManager<AppUser> signInManager,
+            IConfiguration config
+
         )
         {
             _jwt = options.Value;
             _userManager = userManager;
             _refreshRepo = refreshRepo;
             _userRepo = userRepo;
+            _signInManager = signInManager;
+            _config = config;
         }
 
-        public async Task<LoginResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken)
+        public async Task<LoginResponse> LoginAsync(
+            LoginRequest request, 
+            CancellationToken cancellationToken)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
@@ -53,6 +66,61 @@ namespace IMS.Infrastructure.Services
             if (!isValid)
                 throw new UnauthorizedAccessException("Invalid password");
 
+            var response = await JwtAuthenticationAsync(user, cancellationToken);
+            return response;
+
+        }
+
+        public async Task<LoginResponse> LoginWithGoogleAsync(
+            GoogleLoginRequest request, 
+            CancellationToken cancellationToken)
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new[] { _config["GoogleAuth:ClientId"] }
+            };
+
+            var payload = await GoogleJsonWebSignature.ValidateAsync(request.IdToken, settings);
+
+            if (payload == null || string.IsNullOrEmpty(payload.Email))
+                throw new UnauthorizedAccessException("Invalid Google token or missing email.");
+
+            var user = await _userManager.Users
+                .Include(u => u.Intern)
+                .FirstOrDefaultAsync(u => u.Email == payload.Email, cancellationToken);
+
+            if (user == null)
+                throw new UnauthorizedAccessException("Access Denied");
+
+
+            if (user.Intern.Status == InternStatus.Deactivated)
+                throw new UnauthorizedAccessException("Account is deactivated.");
+
+            if (!user.EmailConfirmed)
+            {
+                user.EmailConfirmed = true;
+                await _userManager.UpdateAsync(user);
+            }
+
+            var logins = await _userManager.GetLoginsAsync(user);
+
+            if (!logins.Any(l => l.LoginProvider == "Google"))
+            {
+                await _userManager.AddLoginAsync(user,
+                    new UserLoginInfo("Google", payload.Subject, "Google"));
+            }
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            var response = await JwtAuthenticationAsync(user, cancellationToken);
+
+            return response;
+        }
+
+        private async Task<LoginResponse> JwtAuthenticationAsync(
+            AppUser user,
+            CancellationToken cancellationToken)
+        {
             var accessToken = await GenerateJwtTokenAsync(user);
             var refreshToken = GenerateRefreshToken();
             var refreshTokenHash = ComputeSha256Hash(refreshToken);
@@ -68,18 +136,17 @@ namespace IMS.Infrastructure.Services
                 _refreshRepo.Update(existingRefreshToken);
             }
 
-             var newToken = new RefreshToken
-             {
-                 UserId = user.Id,
-                 TokenHash = refreshTokenHash,
-                 ExpiryDate = DateTime.Now.AddDays(_jwt.RefreshTokenDays),
-                 CreatedAt = DateTime.Now,
-                 IsRevoked = false
-             };
+            var newToken = new RefreshToken
+            {
+                UserId = user.Id,
+                TokenHash = refreshTokenHash,
+                ExpiryDate = DateTime.Now.AddDays(_jwt.RefreshTokenDays),
+                CreatedAt = DateTime.Now,
+                IsRevoked = false
+            };
 
-                await _refreshRepo.CreateAsync(newToken);
-                await _refreshRepo.SaveChangesAsync(cancellationToken);
-
+            await _refreshRepo.CreateAsync(newToken);
+            await _refreshRepo.SaveChangesAsync(cancellationToken);
 
             return new LoginResponse
             {
@@ -87,7 +154,6 @@ namespace IMS.Infrastructure.Services
                 AccessTokenExpiryDate = accessToken.ExpiryDate,
                 RefreshToken = refreshToken
             };
-
         }
 
         public async Task<ServiceResult> RevokeTokenAsync(string refreshToken, CancellationToken cancellationToken)

@@ -15,7 +15,7 @@ function calcCompletion(tracks) {
 }
 
 export default function RoadmapPage() {
-  const [program] = useState(mockPrograms);
+  const [program] = useState(mockPrograms[0]);
   const [requestModal, setRequestModal] = useState(null);
   const [toast, setToast] = useState('');
 

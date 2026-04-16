@@ -11,6 +11,7 @@ namespace IMS.Application.Interfaces.Services
     public interface IAuthService
     {
         Task<LoginResponse> LoginAsync(LoginRequest request, CancellationToken cancellationToken);
+        Task<LoginResponse> LoginWithGoogleAsync(GoogleLoginRequest request, CancellationToken cancellationToken);
         Task<ServiceResult> RevokeTokenAsync(string refreshToken, CancellationToken cancellationToken);
         Task<LoginResponse> RefreshTokenAsync(string token, CancellationToken cancellationToken);
         Task<ServiceResult> SetPasswordAsync(SetPasswordRequest request, CancellationToken cancellationToken);

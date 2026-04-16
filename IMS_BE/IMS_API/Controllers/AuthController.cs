@@ -1,10 +1,12 @@
 ﻿using IMS.Application.DTOs.Auth;
 using IMS.Application.Interfaces.Services;
+using IMS.Infrastructure.Services;
 using IMS.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Sprache;
 using System.Security.Claims;
 
 namespace IMS.Api.Controllers
@@ -55,6 +57,44 @@ namespace IMS.Api.Controllers
             {
                 return BadRequest(new { message = ex.Message });
             }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("signIn-google")]
+        public async Task<IActionResult> GoogleLoginAsync(
+            [FromBody] GoogleLoginRequest request, 
+            CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(request.IdToken))
+                return BadRequest("Missing Google ID token.");
+
+            try
+            {
+                var response = await _authService.LoginWithGoogleAsync(request, cancellationToken);
+
+                if (response == null)
+                    return StatusCode(500, new { Message = "Access Denied" });
+
+                SetAccessTokenCookie(response.AccessToken);
+                SetRefreshTokenCookie(response.RefreshToken);
+
+                return Ok(new
+                {
+                    accessToken = response.AccessToken,
+                    accessTokenExpiryDate = response.AccessTokenExpiryDate,
+                    tokenType = "Bearer",
+                    message = "Login successful!"
+                });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized( new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = ex.Message });
+            }
+
         }
 
 

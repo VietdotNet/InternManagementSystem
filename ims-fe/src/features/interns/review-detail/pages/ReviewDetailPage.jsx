@@ -19,7 +19,7 @@ export default function ReviewDetailPage() {
     setReviews(getReviewRequests());
   }
 
-  const tracks = mockPrograms.tracks.map((t) => t.name);
+  const tracks = mockPrograms[0].tracks.map((t) => t.name);
 
   const filtered = reviews.filter((r) => {
     if (filter.track && r.trackName !== filter.track) return false;
