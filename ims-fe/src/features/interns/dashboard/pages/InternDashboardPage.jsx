@@ -14,9 +14,9 @@ function calcCompletion(tracks) {
 }
 
 export default function InternDashboardPage() {
-  const program = mockPrograms;
+  const program = mockPrograms[0];
   const reviews = getReviewRequests();
-  const completion = calcCompletion(program.tracks);
+  const completion = calcCompletion(program?.tracks || []);
 
   const totalLessons = program.tracks.reduce((s, t) => s + t.lessons.length, 0);
   const passedLessons = program.tracks.reduce(

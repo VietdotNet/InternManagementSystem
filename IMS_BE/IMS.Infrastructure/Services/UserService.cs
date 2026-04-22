@@ -52,7 +52,7 @@ namespace IMS.Infrastructure.Services
                 {
                     UserId = user.Id,
                     ProgramTrackId = request.PositionId,
-                    Status = Domain.Enums.InternStatus.Unactivated
+                    Status = Domain.Enums.InternStatus.Deactivated
                 };
 
                 await _userRepo.CreateInternAsync(intern);

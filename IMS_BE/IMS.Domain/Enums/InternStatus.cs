@@ -8,7 +8,7 @@ namespace IMS.Domain.Enums
 {
     public enum InternStatus
     {
-        Unactivated = 1,
+        Deactivated = 1,
         Active = 2,
         Dropped = 3
     }

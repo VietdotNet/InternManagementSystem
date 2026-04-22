@@ -4,13 +4,17 @@ import LoginHeader from "../components/LoginHeader";
 import LoginForm from "../components/LoginForm";
 import LoginHints from "../components/LoginHints";
 import LoginSidebar from "../components/LoginSidebar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { getCurrentUser } from "@/shared/utils/authApi";
 
 import { useAuth } from "@/shared/context/AuthContext";
 
 function LoginPage() {
   const navigate = useNavigate();
   const { user, setUser } = useAuth();
+  const [oauthStatus, setOauthStatus] = useState(null);
+  const [oauthMessage, setOauthMessage] = useState("");
 
   const {
     formData,
@@ -30,7 +34,6 @@ function LoginPage() {
     if (result?.success && result.user) {
       setUser(result.user); // Lưu user vào context
     }
-
   };
 
   useEffect(() => {
@@ -59,6 +62,23 @@ function LoginPage() {
                 <h2 className="text-xl font-bold text-slate-800">Đăng nhập</h2>
                 <p className="text-sm text-slate-500">Nhập thông tin để truy cập hệ thống</p>
               </div>
+
+              {oauthStatus && (
+  <div
+    className={`flex items-center gap-2 p-3 rounded-lg text-sm ${
+      oauthStatus === "success"
+        ? "bg-green-50 text-green-600"
+        : "bg-red-50 text-red-600"
+    }`}
+  >
+    {oauthStatus === "success" ? (
+      <CheckCircle2 className="w-4 h-4" />
+    ) : (
+      <AlertCircle className="w-4 h-4" />
+    )}
+    {oauthMessage}
+  </div>
+)}
 
               <LoginForm
                 formData={formData}

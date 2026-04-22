@@ -54,6 +54,7 @@ namespace IMS_API
                     services.GetRequiredService<UserManager<AppUser>>());
             }
 
+
             app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
 
