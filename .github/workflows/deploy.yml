@@ -32,7 +32,7 @@ jobs:
       run: |
         docker build -f IMS_BE/IMS_API/Dockerfile -t $REGISTRY/$IMAGE_NAME:${{ github.sha }} \
                                                               -t $REGISTRY/$IMAGE_NAME:latest \
-                                                              ./IMS_BE
+                                                              .
 
     - name: Push Docker Image
       run: |
