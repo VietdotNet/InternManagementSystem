@@ -28,6 +28,12 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Login to ACR
+      run: |
+        docker login imsregistry2026.azurecr.io \
+          -u ${{ secrets.ACR_USERNAME }} \
+          -p ${{ secrets.ACR_PASSWORD }}
+
     - name: Build Docker Image
       run: |
         docker build -f IMS_BE/IMS_API/Dockerfile -t $REGISTRY/$IMAGE_NAME:${{ github.sha }} -t $REGISTRY/$IMAGE_NAME:latest IMS_BE
