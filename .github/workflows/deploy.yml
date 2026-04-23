@@ -40,20 +40,6 @@ jobs:
         docker push $REGISTRY/$IMAGE_NAME:${{ github.sha }}
         docker push $REGISTRY/$IMAGE_NAME:latest
 
-    - name: Assign ACR Pull Role
-      run: |
-        ACR_ID=$(az acr show -n imsregistry2026 --query id -o tsv)
-
-        PRINCIPAL_ID=$(az webapp identity assign \
-          --name $WEBAPP_NAME \
-          --resource-group $RESOURCE_GROUP \
-          --query principalId -o tsv)
-
-        az role assignment create \
-          --assignee $PRINCIPAL_ID \
-          --role AcrPull \
-          --scope $ACR_ID
-
     - name: Deploy to Azure Web App 
       uses: azure/webapps-deploy@v3 
       with: 
