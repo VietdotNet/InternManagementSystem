@@ -14,6 +14,7 @@ namespace IMS.Application.Interfaces.Services
         Task<ServiceResult> CreateMentorAsync(CreateMentorRequest request, string baseUrl);
         Task<ServiceResult> CreateInternAsync(CreateInternRequest request, string baseUrl, CancellationToken cancellationToken);
         Task<Intern?> GetInternByIdAsync(string userId);
+        Task<ServiceResult> DeactivateInternAsync(string internId, CancellationToken cancellationToken);
         Task<IList<MentorResponse>> GetAllMentorsAsync();
     }
 }

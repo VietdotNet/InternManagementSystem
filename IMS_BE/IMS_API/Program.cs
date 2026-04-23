@@ -3,7 +3,9 @@ using DotNetEnv;
 using IMS.Infrastructure;
 using IMS.Infrastructure.DependencyInjection;
 using IMS.Infrastructure.Persistence;
+using IMS.Infrastructure.Services;
 using IMS.Infrastructure.Settings;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 
 namespace IMS_API
@@ -12,7 +14,10 @@ namespace IMS_API
     {
         public static async Task Main(string[] args)
         {
-            Env.Load();
+            if (File.Exists(".env"))
+            {
+                Env.Load();
+            }
 
             var builder = WebApplication.CreateBuilder(args);
 
@@ -30,38 +35,48 @@ namespace IMS_API
                 .RequireClaim("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name", "Lê Thị Khánh Linh", "Nguyễn Thị Hà")); 
             });
 
+            builder.Services.AddHostedService<SeedHostedService>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders =
+                    ForwardedHeaders.XForwardedProto |
+                    ForwardedHeaders.XForwardedFor
+            });
+
+
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            if (!app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseExceptionHandler("/error");
+                app.UseHsts();
             }
 
-            using (var scope = app.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-
-                await SeedData.SeedRoles(
-                    services.GetRequiredService<RoleManager<IdentityRole>>());
-
-                await SeedData.SeedAdmin(
-                    services.GetRequiredService<UserManager<AppUser>>());
-            }
-
-
-            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            app.UseRouting();
+
+            app.MapGet("/health", () => Results.Ok("Healthy")).AllowAnonymous();
+            app.MapGet("/", () => Results.Ok("IMS API Running")).AllowAnonymous();
+
+            app.UseCors("CorsPolicy");
+
+            //app.UseStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.Map("/error", () => Results.Problem());
 
 
             app.MapControllers();

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "CgroAwWVVQs6k64woJhSWDPnY6lgte+ZTycQgWpijNogmyZvwHoia7L+AsXRiWfxO5XMQmvyxuDbEVJe3zKJJA==",
+  "dgSpecHash": "lwL3r8Q67/11fbUW162Pa70HX96GtA5o0aQx4BLrf/waN2zFgCnHskqbAvDW+13LO98aEMytmoqEIGyhwhdkVg==",
   "success": true,
   "projectFilePath": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\IMS.Api.csproj",
   "expectedPackageFiles": [
@@ -57,6 +57,7 @@
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.6\\microsoft.visualstudio.azure.containers.tools.targets.1.19.6.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\mimekit\\4.15.1\\mimekit.4.15.1.nupkg.sha512",

@@ -19,7 +19,12 @@ namespace IMS.Infrastructure.DependencyInjection
             var connectionString = configuration.GetConnectionString("IMS_SPA") ?? throw new InvalidOperationException("Connection string 'IMS_SPA' not found.");
 
             services.AddDbContext<AppDbContext>(options =>
-               options.UseSqlServer(connectionString));
+            {
+                options.UseSqlServer(connectionString, sql =>
+                {
+                    sql.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null);
+                });
+            }, ServiceLifetime.Scoped);
 
             services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
 

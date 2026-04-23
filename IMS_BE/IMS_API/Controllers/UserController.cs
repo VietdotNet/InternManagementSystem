@@ -55,5 +55,18 @@ namespace IMS.Api.Controllers
             var mentors = await _userService.GetAllMentorsAsync();
             return Ok(mentors);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPatch("{internId}")]
+        public async Task<IActionResult> DeactivateInternAsync(
+            string internId, 
+            CancellationToken cancellationToken)
+        {
+            var result = await _userService.DeactivateInternAsync(internId, cancellationToken);
+            if (!result.Success)
+                return NotFound(result.Message);
+
+            return Ok(result);
+        }
     }
 }

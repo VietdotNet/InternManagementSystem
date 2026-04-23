@@ -4,6 +4,7 @@ using IMS.Application.Interfaces.Repositories;
 using IMS.Application.Interfaces.Services;
 using IMS.Domain.Common;
 using IMS.Domain.Entities;
+using IMS.Domain.Enums;
 using IMS.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
@@ -100,6 +101,21 @@ namespace IMS.Infrastructure.Services
         public async Task<Intern?> GetInternByIdAsync(string userId)
         {
             return await _userRepo.GetInternByIdAsync(userId);
+        }
+
+        public async Task<ServiceResult> DeactivateInternAsync(string internId, CancellationToken cancellationToken)
+        {
+            var intern = await _userRepo.GetInternByIdAsync(internId);
+
+            if (intern == null)
+                return ServiceResult.Fail("Người dùng không tồn tại!");
+
+            intern.Status = InternStatus.Deactivated;
+
+            await _userRepo.SaveChangesAsync(cancellationToken);
+
+            return ServiceResult.Ok("Ẩn tài khoản thành công");
+
         }
 
         private async Task<AppUser> CreateUserAsync(CreateUserRequest request)
