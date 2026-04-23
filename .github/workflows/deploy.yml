@@ -23,8 +23,11 @@ jobs:
     - name: Show files 
       run: ls -R
 
-    - name: Login ACR
-      run: az acr login --name imsregistry2026
+    - name: Login to ACR
+      run: |
+        docker login imsregistry2026.azurecr.io \
+          -u ${{ secrets.ACR_USERNAME }} \
+          -p ${{ secrets.ACR_PASSWORD }}
 
     - name: Build Docker Image
       run: |
