@@ -1,0 +1,48 @@
+name: Build and Push Docker Image to ACR
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: imsregistry2026.azurecr.io
+  IMAGE_NAME: ims-api
+  WEBAPP_NAME: ims-vnq 
+  RESOURCE_GROUP: ims-rg
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Login Azure
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Login ACR
+      run: az acr login --name imsregistry2026
+
+    - name: Build Docker Image
+      run: |
+        docker build -f IMS_API/Dockerfile -t $REGISTRY/$IMAGE_NAME:${{ github.sha }} \
+                                           -t $REGISTRY/$IMAGE_NAME:latest .
+
+    - name: Push Docker Image
+      run: |
+        docker push $REGISTRY/$IMAGE_NAME:${{ github.sha }}
+        docker push $REGISTRY/$IMAGE_NAME:latest
+
+    - name: Deploy to Azure Web App 
+      uses: azure/webapps-deploy@v3 
+      with: 
+        app-name: ${{ env.WEBAPP_NAME }} 
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+    - name: Azure Logout 
+      run: az logout
