@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "D:\\DEHA\\IMS\\IMS_BE\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|NewFolder1{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|D:\\DEHA\\IMS\\IMS_BE\\deploy.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|NewFolder1{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|solutionrelative:deploy.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{3694D1BB-7B31-4B86-9D9C-3D56DA1839CD}|docker-compose.dcproj|d:\\deha\\ims\\ims_be\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{3694D1BB-7B31-4B86-9D9C-3D56DA1839CD}|docker-compose.dcproj|solutionrelative:.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|workflows{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|D:\\DEHA\\IMS\\IMS_BE\\deploy.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|workflows{FBDA59B9-6D0D-4B11-8CFE-7E39E3CE3E58}|solutionrelative:deploy.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3694D1BB-7B31-4B86-9D9C-3D56DA1839CD}|docker-compose.dcproj|d:\\deha\\ims\\ims_be\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{3694D1BB-7B31-4B86-9D9C-3D56DA1839CD}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|solutionrelative:ims_api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BE692DB5-D97E-47D7-960C-147BDFE3486A}|IMS_API\\IMS.Api.csproj|d:\\deha\\ims\\ims_be\\ims_api\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -55,12 +55,25 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": ".dockerignore",
+              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\.dockerignore",
+              "RelativeDocumentMoniker": ".dockerignore",
+              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\.dockerignore",
+              "RelativeToolTip": ".dockerignore",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-23T17:15:03.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "deploy.yml",
               "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\deploy.yml",
               "RelativeDocumentMoniker": "deploy.yml",
               "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\deploy.yml",
               "RelativeToolTip": "deploy.yml",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAACsAAAApAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAwBUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
               "WhenOpened": "2026-04-23T16:16:24.982Z",
               "EditorCaption": ""
@@ -91,7 +104,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "docker-compose.yml",
               "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\docker-compose.yml",
               "RelativeDocumentMoniker": "docker-compose.yml",
@@ -99,20 +112,7 @@
               "RelativeToolTip": "docker-compose.yml",
               "ViewState": "AQIAAE4AAAAAAAAAAAAAAGoAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2026-04-17T08:09:30.006Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Dockerfile",
-              "RelativeDocumentMoniker": "IMS_API\\Dockerfile",
-              "ToolTip": "D:\\DEHA\\IMS\\IMS_BE\\IMS_API\\Dockerfile",
-              "RelativeToolTip": "IMS_API\\Dockerfile",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-04-17T08:03:22.781Z"
+              "WhenOpened": "2026-04-17T08:09:30.006Z"
             }
           ]
         }
